@@ -1,7 +1,9 @@
-## Install docker-compose here:
+## Install docker-compose here
 
 https://docs.docker.com/compose/install/
 
-# Setup 
+## Setup 
 
-- docker-compose up
+- run the command: docker-compose up
+
+You now have a node app running on http://0.0.0.0:3001
