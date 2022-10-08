@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: "./api-gateway/Dockerfile"
+    depends_on:
+      - server-db
     ports:
       - "3001:3001"
     volumes:
@@ -13,7 +15,7 @@ services:
     container_name: server_db
     image: postgres
     environment:
-      POSTGRES_DB: server_db
+      POSTGRES_DB: db
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: secret
     ports:
