@@ -10,7 +10,7 @@ const AppDataSource = new DataSource({
   database: accessEnv("PG_DB"),
   password: accessEnv("PG_PASSWORD"),
   port: accessEnv("PG_PORT"),
-  entities: [Message]
+  entities: [Message],
 });
 
 

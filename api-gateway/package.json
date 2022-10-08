@@ -8,6 +8,7 @@
   "scripts": {
     "start": "node index.dev.js",
     "start:dev": "node index.dev.js",
+    "db:migrate:create": "node ./node_modules/typeorm/cli.js migration:create",
     "db:migrate": "node ./node_modules/typeorm/cli.js migration:run",
     "db:migrate:undo": "node ./node_modules/typeorm/cli.js migration:revert",
     "build": "tsc",
