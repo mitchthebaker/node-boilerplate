@@ -29,3 +29,14 @@ services:
       PGADMIN_LISTEN_PORT: 80
     ports: 
       - "3201:80"
+  client-app:
+    container_name: client-app
+    build:
+      context: .
+      dockerfile: "./client-app/Dockerfile"
+    depends_on:
+      - api-gateway
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client-app:/opt/app
