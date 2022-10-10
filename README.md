@@ -10,6 +10,39 @@ There is also a React frontend client which is setup to send basic GET/POST requ
 
 `git clone git@github.com:mitchthebaker/node-boilerplate.git`
 
+
+
+### Next, cd into ./api-gateway and create a .env file 
+
+Inside .env, add the following variables:
+
+```
+  NODE_ENV=development
+  PORT=3001
+
+  PG_USER=admin
+  PG_HOST=server_db
+  PG_DB=db
+  PG_PASSWORD=secret
+  PG_PORT=5432
+```
+
+What's most important here is that the PG... variables are setup, otherwise the connection to PostgreSQL will be unsuccessful. 
+
+
+
+### Next, we're going to be doing the same process but cd into ./client-app and create a .env file 
+
+Inside .env, add the following variables: 
+
+```
+  NODE_ENV=development
+
+  REACT_APP_API_GATEWAY_URI=http://localhost:3001
+```
+
+
+
 ### Update environment variables in docker-compose.yml
 
 Open up docker-compose.yml. Inside you'll see the configuration required to setup each container. 
