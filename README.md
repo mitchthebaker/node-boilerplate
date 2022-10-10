@@ -66,11 +66,55 @@ If you take a look at the `pgadmin` service, we have a few environment variables
       - "3201:80"
 ```
 
-### Install docker-compose here
+### If you haven't already install docker-compose here
 
 https://docs.docker.com/compose/install/
 
+After you've installed docker compose, you can run the command: 
 
-- run the command: docker-compose up
+`docker-compose up` in the root directory /node-boilerplate. If you changed the project name, the root directory is the folder containing docker-compose.yml. 
 
-You now have a node app running on http://0.0.0.0:3001
+It will take some time to spin up each service, so be patient while everything is setup. 
+
+If you've setup the .env files in `api-gateway` correctly, you should see `api-gateway listening on 3001`.
+
+You should also see `client-app` listen on port 3000.
+
+However, we haven't set up pgadmin yet so there may be an error thrown when the `api-gateway` attempts to connect to the PostgreSQL database. 
+
+### Therefore, the last step is to add a new server in pgadmin so we can perform queries against our database. 
+
+Open up pgadmin by typing http://localhost:3201 in your browser. 
+
+Login with the credentials you set for PGADMIN_DEFAULT_EMAIL/PGADMIN_DEFAULT_PASSWORD. 
+
+Next, click on `Add New Server`:
+
+![AddNewServer](https://imgur.com/CFD67lu)
+
+In the modal that pops up, enter a name under the General tab. This name is not important so choose anything.
+
+~[AddGeneralName](https://imgur.com/kqWAy8r)
+
+This is the most important step. Click on the `Connection` tab.
+
+For `Hostname/address`, set this to `server_db` which is the container_name for server-db in docker-compose.yml. 
+
+Next, for the port input 5432 if it's not set to that already.
+
+Then, update the `Username` to `admin`.
+
+Then, update the `Password` to `secret`.
+
+Lastly, click save. 
+
+![UpdateConnectionInfo](https://imgur.com/WNdLtwQ)
+
+Now pgadmin is setup with our database information, which is all we have to do for `api-gateway` to begin performing queries against the database.
+
+The last couple steps you need to do is just to simply quit docker-compose by typing `ctrl+C`.
+
+Then, rerun `docker-compose up`.
+
+You now have a Node.js REST API running on http://localhost:3001,
+a React frontend running on http://localhost:3000, and pgadmin running on http://localhost:3201!
