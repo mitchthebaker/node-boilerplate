@@ -90,11 +90,11 @@ Login with the credentials you set for PGADMIN_DEFAULT_EMAIL/PGADMIN_DEFAULT_PAS
 
 Next, click on `Add New Server`:
 
-[Imgur](https://imgur.com/CFD67lu)
+[Image for Add New Server](https://imgur.com/CFD67lu)
 
 In the modal that pops up, enter a name under the General tab. This name is not important so choose anything.
 
-[Imgur](https://imgur.com/kqWAy8r)
+[Image for Name in General Tab](https://imgur.com/kqWAy8r)
 
 This is the most important step. Click on the `Connection` tab.
 
@@ -108,7 +108,7 @@ Then, update the `Password` to `secret`.
 
 Lastly, click save. 
 
-[Imgur](https://imgur.com/WNdLtwQ)
+[Image for Updating Connection Tab](https://imgur.com/WNdLtwQ)
 
 Now pgadmin is setup with our database information, which is all we have to do for `api-gateway` to begin performing queries against the database.
 
