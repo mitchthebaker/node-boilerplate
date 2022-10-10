@@ -1,10 +1,10 @@
 const pool = require("./connection");
-const migrateTables = require("./migrations/migrateTables");
+const performMigration = require("./migrations/performMigration");
 
 const initConnection = async () => {
   try {
     await pool.connect();
-    await migrateTables();
+    await performMigration();
   }
   catch(err) {
     console.error(`Error during client initialization, ${err}`);
