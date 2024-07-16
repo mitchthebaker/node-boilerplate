@@ -1,4 +1,4 @@
-name: Run Unit Tests 
+name: Run Playwright tests 
 on:
   pull_request:
     types: [opened, reopened]
@@ -12,13 +12,34 @@ on:
       - "*smoke*"
 
 jobs: 
-  job-1:
-    name: Unit test job 1 
+  unit-tests:
+    name: Playwright unit tests 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client-app
+    timeout-minutes: 60
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 
-      
-      - name: Run playwright tests 
-        run: |
-          echo "in run playwright test job"
+
+      - name: Setup node 
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies 
+        run: npm install
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: ./playwright-report/
+          retention-days: 30
