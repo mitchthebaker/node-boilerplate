@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 
-export const Form = () => {
+const Form = () => {
   const [input, setInput] = useState("");
 
   const handleChange = (e) => setInput(e.target.value);
@@ -26,8 +26,10 @@ export const Form = () => {
   return (
     <section>
       <label> Send a message </label>
-      <input type="text" onChange={e => handleChange(e)} />
-      <button onClick={handleSubmit}> Submit </button>
+      <input type="text" id="message-input" onChange={e => handleChange(e)} />
+      <button id="submission-button" onClick={handleSubmit}> Submit </button>
     </section>
   );
 }
+
+export default Form;

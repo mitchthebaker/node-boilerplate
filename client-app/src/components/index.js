@@ -1,2 +1,2 @@
-export { Form } from "./Form.js";
-export { MessagesList} from "./MessagesList.js";
+export { default as Form } from "./Form";
+export { default as MessagesList} from "./MessagesList";
