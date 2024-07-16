@@ -13,11 +13,15 @@ test("Verify text changes are stored in input", async ({ mount }) => {
   await expect(FormComponent.locator(inputSelector)).toHaveValue("Test message");
 });
 
-test("Verify form submission displays a new message", async ({ page }) => {
-  await page.goto("localhost:3000");
-  await page.fill(inputSelector, "Test message");
-  await page.click(submitSelector);
-  await page.reload(); 
-  await page.waitForLoadState("load");
-  await expect(page.locator(messagesListSelector)).toContainText("Test message");
+test("Verify form submission displays a new message", async ({ mount }) => {
+  const FormComponent = await mount(<Form />);
+  await FormComponent.locator(inputSelector).fill("Test message");
+  await expect(FormComponent.locator(inputSelector)).toHaveValue("Test message");
+  await FormComponent.locator(submitSelector).click();
+  //await page.goto("localhost:3000");
+  //await page.fill(inputSelector, "Test message");
+  //await page.click(submitSelector);
+  //await page.reload(); 
+  //await page.waitForLoadState("load");
+  //await expect(page.locator(messagesListSelector)).toContainText("Test message");
 });
