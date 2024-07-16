@@ -8,5 +8,3 @@ test('Verify components exist in App.js', async ({ mount }) => {
   await expect(component).toContainText('Send a message');
   await expect(component).toContainText('Submit');
 });
-
-// goto url
