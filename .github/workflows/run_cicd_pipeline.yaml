@@ -17,9 +17,11 @@ on:
 permissions: read-all
 
 jobs: 
-  run_docker: 
+  run-docker: 
     name: Run Docker tests 
     uses: ./.github/workflows/run_docker_containers.yaml
-  run_unit_tests: 
+  unit-tests: 
     name: Run unit tests 
     uses: ./.github/workflows/run_unit_tests.yaml
+    needs:
+      - run-docker
