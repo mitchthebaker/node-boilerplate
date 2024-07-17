@@ -3,7 +3,9 @@ on:
   push: 
     paths:
       - ".github/workflows/run_unit_tests.yaml"
-      
+  workflow_call:
+  workflow_dispatch:
+
 jobs: 
   unit-tests:
     name: Unit tests

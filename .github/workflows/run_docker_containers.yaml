@@ -3,6 +3,8 @@ on:
   push: 
     paths:
       - ".github/workflows/run_docker_containers.yaml"
+  workflow_call:
+  workflow_dispatch:
 
 jobs: 
   run-docker: 
