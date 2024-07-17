@@ -2,8 +2,8 @@ name: Run Docker Containers
 on:
   push: 
     paths:
-      - ".github/workflows/run_unit_tests.yaml"
-      
+      - ".github/workflows/run_docker_containers.yaml"
+
 jobs: 
   run-docker: 
     name: Run Docker 
