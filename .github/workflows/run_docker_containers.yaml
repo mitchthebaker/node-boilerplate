@@ -1,4 +1,4 @@
-ame: Run Docker Containers 
+name: Run Docker Containers 
 on:
   pull_request:
     types: [opened, reopened]
