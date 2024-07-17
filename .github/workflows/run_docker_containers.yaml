@@ -36,7 +36,7 @@ jobs:
           echo "PG_DB=db" >> .env
           echo "PG_PASSWORD=secret" >> .env
           echo "PG_PORT=5432" >> .env
-
+          cat .env
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -54,7 +54,7 @@ jobs:
 
       - name: Run Docker
         run: |
-          docker-compose -f $COMPOSE_FILE up
+          docker-compose -f $COMPOSE_FILE up -d
       
       - name: Wait for services to be ready
         run: |
