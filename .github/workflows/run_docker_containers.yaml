@@ -23,6 +23,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 
+      
+      - name: Build .env file for api-gateway service 
+        run: |
+          cd ./api-gateway
+          ls -la
+          touch .env 
+          echo "NODE_ENV=development" >> .env
+          echo "PORT=3001" >> .env
+          echo "PG_USER=admin" >> .env
+          echo "PG_HOST=server_db" >> .env
+          echo "PG_DB=db" >> .env
+          echo "PG_PASSWORD=secret" >> .env
+          echo "PG_PORT=5432" >> .env
+
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
