@@ -1,11 +1,10 @@
 FROM node
 
-RUN mkdir -p /opt/app
 WORKDIR /opt/app
 
-COPY ./api-gateway/package*.json /opt/app/
+COPY ./api-gateway/package*.json .
 RUN npm install
-COPY . /opt/app
+COPY . .
 
 EXPOSE 3001
 
