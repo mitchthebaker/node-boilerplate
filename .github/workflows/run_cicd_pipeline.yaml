@@ -19,6 +19,8 @@ permissions: read-all
 jobs: 
   run-docker: 
     uses: ./.github/workflows/run_docker_containers.yaml
+    with: 
+      ENVIRONMENT: Development
   unit-tests: 
     uses: ./.github/workflows/run_unit_tests.yaml
     needs:
