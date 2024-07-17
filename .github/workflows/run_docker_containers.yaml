@@ -61,4 +61,4 @@ jobs:
           curl http://localhost:3001
 
       - name: Stop Docker
-        run: docker-compose -f $COMPOSE_FILE down 
+        run: docker-compose -f $COMPOSE_FILE down -v
