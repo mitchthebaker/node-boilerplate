@@ -10,7 +10,8 @@ services:
     ports:
       - "3001:3001"
     volumes:
-      - ./api-gateway:/opt/app
+      - ./api-gateway/:/opt/app
+      - /opt/app/node_modules
   server-db:
     container_name: server_db
     image: postgres
@@ -39,4 +40,5 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./client-app:/opt/app
+      - ./client-app/:/opt/app
+      - /opt/app/node_modules
