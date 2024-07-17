@@ -1,0 +1,24 @@
+name: Run the CI/CD Pipeline 
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches:
+      - "main"
+  pull_request_review:
+    types: [submitted]
+  push: 
+    branches: 
+      - "main"
+      - "*build-ci*"
+    paths:
+      - ".github/workflows/run_cicd_pipeline.yaml"
+
+permissions: read-all
+
+jobs: 
+  run_docker: 
+    name: Run Docker tests 
+    uses: ./.github/workflows/run_docker_containers.yaml
+  run_unit_tests: 
+    name: Run unit tests 
+    uses: ./.github/workflows/run_unit_tests.yaml

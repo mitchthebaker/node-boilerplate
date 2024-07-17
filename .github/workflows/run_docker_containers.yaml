@@ -1,16 +1,9 @@
 name: Run Docker Containers 
 on:
-  pull_request:
-    types: [opened, reopened]
-    branches:
-      - "main"
-  pull_request_review:
-    types: [submitted]
   push: 
-    branches: 
-      - "main"
-      - "*build-ci*"
-
+    paths:
+      - ".github/workflows/run_unit_tests.yaml"
+      
 jobs: 
   run-docker: 
     name: Run Docker 
