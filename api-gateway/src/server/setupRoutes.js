@@ -2,7 +2,7 @@ const pool = require("@root/db/connection");
 const generateUUID = require("@root/helpers/generateUUID");
 
 const setupRoutes = (app) => {
-  app.get("/test", async (req, res) => {
+  app.get("/", async (req, res) => {
     console.log(process.env.NODE_ENV);
     res.send({
       environment: process.env.NODE_ENV,
