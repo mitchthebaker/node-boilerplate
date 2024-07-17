@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: "./api-gateway/Dockerfile"
+    env_file: 
+      - ./api-gateway/.env
     depends_on:
       - server-db
     ports:
