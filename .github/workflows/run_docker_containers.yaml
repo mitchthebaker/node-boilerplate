@@ -8,6 +8,11 @@ on:
       ENVIRONMENT:
         required: true
         type: string
+    secrets:
+      DOCKER_USERNAME:
+        required: true
+      DOCKER_TOKEN:
+        required: true
   workflow_dispatch:
 
 permissions: read-all
@@ -17,11 +22,8 @@ jobs:
     name: Run Docker 
     runs-on: ubuntu-latest 
     environment: ${{ inputs.ENVIRONMENT }}
-    secrets: inherit
     env: 
       COMPOSE_FILE: ./docker-compose.yml
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 
