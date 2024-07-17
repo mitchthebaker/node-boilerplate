@@ -1,0 +1,14 @@
+name: Run SBOM Generation
+on:
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs: 
+  sbom-generation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test API Gateway 
+        uses: anchore/sbom-action@v0
+        with:
+          path: ./api-gateway/ 
