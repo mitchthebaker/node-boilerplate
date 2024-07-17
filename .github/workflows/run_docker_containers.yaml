@@ -53,7 +53,7 @@ jobs:
 
       - name: Run Docker
         run: |
-          docker-compose -f $COMPOSE_FILE up
+          docker-compose -f $COMPOSE_FILE up -d
       
       - name: Check if client-app service is running 
         run: | 
