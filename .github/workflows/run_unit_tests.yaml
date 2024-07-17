@@ -6,6 +6,8 @@ on:
   workflow_call:
   workflow_dispatch:
 
+permissions: read-all
+
 jobs: 
   unit-tests:
     name: Unit tests

@@ -6,6 +6,8 @@ on:
   workflow_call:
   workflow_dispatch:
 
+permissions: read-all
+
 jobs: 
   run-docker: 
     name: Run Docker 
