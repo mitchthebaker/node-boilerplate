@@ -37,26 +37,27 @@ jobs:
         run: |
           docker-compose -f $COMPOSE_FILE build
           docker-compose -f $COMPOSE_FILE push
+
+      - name: Run Docker
+        run: |
+          docker-compose -f $COMPOSE_FILE up -d
       
       - name: Wait for containers to be ready
         run: |
-          echo "Waiting for frontend to be ready..."
           until curl -s http://localhost:3000 > /dev/null; do
             echo "Waiting for client..."
             sleep 5
           done
 
-          echo "Waiting for server to be ready..."
           until curl -s http://localhost:3001 > /dev/null; do
             echo "Waiting for server..."
             sleep 5
           done
 
-      - name: Run Docker
+      - name: Run Docker tests
         run: |
-          docker-compose -f $COMPOSE_FILE up -d
-
           curl http://localhost:3000
           curl http://localhost:3001
 
-          docker-compose -f $COMPOSE_FILE down 
+      - name: Stop Docker
+        run: docker-compose -f $COMPOSE_FILE down 
