@@ -28,7 +28,7 @@ jobs:
         run: |
           cd ./api-gateway
           touch .env 
-          echo "NODE_ENV=${{ secrets.NODE_ENV_DEV }}"" >> .env
+          echo "NODE_ENV=${{ secrets.NODE_ENV_DEV }}" >> .env
           echo "PORT=${{ secrets.NODE_PORT }}" >> .env
           echo "PG_USER=${{ secrets.PG_USER }}" >> .env
           echo "PG_HOST=${{ secrets.PG_HOST }}" >> .env
