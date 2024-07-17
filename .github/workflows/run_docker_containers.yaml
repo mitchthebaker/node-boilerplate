@@ -27,15 +27,14 @@ jobs:
       - name: Build .env file for api-gateway service 
         run: |
           cd ./api-gateway
-          ls -la
           touch .env 
-          echo "NODE_ENV=development" >> .env
-          echo "PORT=3001" >> .env
-          echo "PG_USER=admin" >> .env
-          echo "PG_HOST=server_db" >> .env
-          echo "PG_DB=db" >> .env
-          echo "PG_PASSWORD=secret" >> .env
-          echo "PG_PORT=5432" >> .env
+          echo ${{ secrets.NODE_ENV_DEV }} >> .env
+          echo ${{ secrets.NODE_PORT }} >> .env
+          echo ${{ secrets.PG_USER }} >> .env
+          echo ${{ secrets.PG_HOST }} >> .env
+          echo ${{ secrets.PG_DB }} >> .env
+          echo ${{ secrets.PG_PASSWORD }} >> .env
+          echo ${{ secrets.PG_PORT }} >> .env
           cat .env
 
       - name: Set up Docker Buildx
