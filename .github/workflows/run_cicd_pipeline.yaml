@@ -26,5 +26,8 @@ jobs:
       - run-docker
   sonarcloud-analysis:
     uses: ./.github/workflows/run_sonarcloud.yaml
+    with: 
+      ENVIRONMENT: Development
+    secrets: inherit
     needs:
       - run-docker
