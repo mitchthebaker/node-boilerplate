@@ -12,6 +12,7 @@ on:
       - "*build-ci*"
     paths:
       - ".github/workflows/run_cicd_pipeline.yaml"
+  workflow_dispatch:
 
 permissions: read-all
 
