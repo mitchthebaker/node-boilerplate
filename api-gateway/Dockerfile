@@ -4,7 +4,7 @@ WORKDIR /opt/app
 
 COPY ./api-gateway/package*.json ./
 
-RUN npm install
+RUN npm install --dev
 
 EXPOSE 3001
 
