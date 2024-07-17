@@ -28,13 +28,13 @@ jobs:
         run: |
           cd ./api-gateway
           touch .env 
-          echo ${{ secrets.NODE_ENV_DEV }} >> .env
-          echo ${{ secrets.NODE_PORT }} >> .env
-          echo ${{ secrets.PG_USER }} >> .env
-          echo ${{ secrets.PG_HOST }} >> .env
-          echo ${{ secrets.PG_DB }} >> .env
-          echo ${{ secrets.PG_PASSWORD }} >> .env
-          echo ${{ secrets.PG_PORT }} >> .env
+          echo "NODE_ENV=${{ secrets.NODE_ENV_DEV }}"" >> .env
+          echo "PORT=${{ secrets.NODE_PORT }}" >> .env
+          echo "PG_USER=${{ secrets.PG_USER }}" >> .env
+          echo "PG_HOST=${{ secrets.PG_HOST }}" >> .env
+          echo "PG_DB=${{ secrets.PG_DB }}" >> .env
+          echo "PG_PASSWORD=${{ secrets.PG_PASSWORD }}" >> .env
+          echo "PG_PORT=${{ secrets.PG_PORT }}" >> .env
           cat .env
 
       - name: Set up Docker Buildx
