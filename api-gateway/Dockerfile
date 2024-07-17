@@ -4,7 +4,7 @@ RUN mkdir -p /opt/app
 WORKDIR /opt/app
 
 COPY ./api-gateway/package*.json /opt/app/
-RUN npm install --include=dev
+RUN npm install
 COPY . /opt/app
 
 EXPOSE 3001
