@@ -54,19 +54,6 @@ jobs:
       - name: Run Docker
         run: |
           docker-compose -f $COMPOSE_FILE up -d
-      
-      - name: Wait for services to be ready
-        run: |
-          for i in {1..10}; do
-            if curl --fail http://localhost:3000 && curl --fail http://localhost:3001; then
-              echo "All services are up"
-              exit 0
-            fi
-            echo "Waiting for services to be ready..."
-            sleep 10
-          done
-          echo "Services did not start in time"
-          exit 1
 
       - name: Run Docker tests
         run: |
