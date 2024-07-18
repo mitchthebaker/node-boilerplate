@@ -4,10 +4,6 @@ on:
     paths:
       - ".github/workflows/run_docker_containers.yaml"
   workflow_call:
-    inputs:
-      ENVIRONMENT:
-        required: true
-        type: string
     secrets:
       DOCKER_USERNAME:
         required: true
