@@ -11,4 +11,4 @@ jobs:
       - name: Test API Gateway 
         uses: anchore/sbom-action@v0
         with:
-          path: ./api-gateway/ 
+          path: ./
