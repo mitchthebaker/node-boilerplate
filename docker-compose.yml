@@ -16,7 +16,7 @@ services:
       - /opt/app/node_modules
 
   server-db:
-    container_name: server_db
+    container_name: server-db
     image: postgres
     environment:
       POSTGRES_DB: db
