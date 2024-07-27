@@ -19,6 +19,7 @@ runs:
   using: "composite"
   steps:
     - name: Build .env file for api-gateway service 
+      shell: bash
       run: |
         cd ./api-gateway
         touch .env 
