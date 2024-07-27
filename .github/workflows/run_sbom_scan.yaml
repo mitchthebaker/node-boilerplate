@@ -19,5 +19,5 @@ jobs:
           output: sbom-artifact.yaml
       - uses: actions/upload-artifact@v4
         with:
-          name: tern 
+          name: sbom-artifact 
           path: ${{ steps.scan.outputs.file }} 
