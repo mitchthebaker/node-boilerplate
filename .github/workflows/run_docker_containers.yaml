@@ -4,10 +4,6 @@ on:
     paths:
       - ".github/workflows/run_docker_containers.yaml"
   workflow_call:
-    inputs:
-      ENVIRONMENT:
-        required: true
-        type: string
     secrets:
       DOCKER_USERNAME:
         required: true
@@ -21,7 +17,7 @@ jobs:
   run-docker: 
     name: Run Docker 
     runs-on: ubuntu-latest 
-    environment: ${{ inputs.ENVIRONMENT }}
+    environment: Development
     env: 
       COMPOSE_FILE: ./docker-compose.yml
     steps:
@@ -57,21 +53,39 @@ jobs:
 
       - name: Run Docker
         run: |
-          docker-compose -f $COMPOSE_FILE up -d
+          docker-compose -f $COMPOSE_FILE up
       
       - name: Check if client-app service is running 
         run: | 
+          counter=0
+          max_attempts=6
+
           until curl -I http://localhost:${{ secrets.REACT_PORT }} 2>/dev/null | grep -q "200 OK"; do
+            if [ $counter -ge $max_attempts ]; then
+                echo "Timeout reached: client-app service was not ready in 30 seconds."
+                exit 1
+            fi
+
             echo "Waiting for client-app service to be ready..."
             sleep 5
+            counter=$((counter + 1))
           done 
           echo "client-app is running!"
       
       - name: Check if api-gateway service is running 
         run: | 
+          counter=0
+          max_attempts=6
+
           until curl -I http://localhost:${{ secrets.NODE_PORT }} 2>/dev/null | grep -q "200 OK"; do
+            if [ $counter -ge $max_attempts ]; then
+                echo "Timeout reached: client-app service was not ready in 30 seconds."
+                exit 1
+            fi
+
             echo "Waiting for api-gateway service to be ready..."
             sleep 5
+            counter=$((counter + 1))
           done 
           echo "api-gateway is running!"
 
