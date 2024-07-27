@@ -91,14 +91,14 @@ jobs:
         with:
           image-name: mitchthebaker/api-gateway
           dockerfile: ./api-gateway/Dockerfile
-          context: ./api-gateway/
+          context: ./api-gateway
       
       - name: Deploy client-app image to DockerHub
         uses: ./.github/actions/dockerhub-deploy
         with: 
           image-name: mitchthebaker/client-app
           dockerfile: ./client-app/Dockerfile
-          context: ./client-app/
+          context: ./client-app
       
       - name: Log out from DockerHub
         run: docker logout
