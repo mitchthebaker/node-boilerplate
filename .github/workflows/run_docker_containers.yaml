@@ -4,13 +4,6 @@ on:
     paths:
       - ".github/workflows/run_docker_containers.yaml"
   workflow_call:
-    secrets:
-      DOCKER_USERNAME:
-        required: true
-        default: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_PASSWORD:
-        required: true
-        default: ${{ secrets.DOCKER_PASSWORD }}
   workflow_dispatch:
 
 permissions: read-all
