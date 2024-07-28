@@ -2,9 +2,9 @@ version: "3"
 services:
   api-gateway:
     container_name: api-gateway
-    #build:
-    #  context: .
-    #  dockerfile: "./api-gateway/Dockerfile"
+    build:
+      context: .
+      dockerfile: "./api-gateway/Dockerfile"
     image: mitchthebaker/api-gateway:latest
     env_file: 
       - ./api-gateway/.env
@@ -38,9 +38,9 @@ services:
       
   client-app:
     container_name: client-app
-    #build:
-    #  context: .
-    #  dockerfile: "./client-app/Dockerfile"
+    build:
+      context: .
+      dockerfile: "./client-app/Dockerfile"
     image: mitchthebaker/client-app:latest
     depends_on:
       - api-gateway
