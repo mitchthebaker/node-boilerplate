@@ -30,9 +30,6 @@ jobs:
           PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
           PG_PORT: ${{ secrets.PG_PORT }}
 
-      #- name: Set up Docker Buildx
-      #  uses: docker/setup-buildx-action@v2
-
       - name: Build and push Docker images
         run: |
           docker-compose -f $COMPOSE_FILE build
