@@ -3,6 +3,8 @@ on:
   workflow_call:
   workflow_dispatch:
 
+permissions: read-all
+
 jobs: 
   build:
     if: github.ref == 'refs/heads/main'
