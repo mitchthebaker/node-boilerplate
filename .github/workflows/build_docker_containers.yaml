@@ -11,6 +11,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 
+      
+      - name: Build .env files
+        uses: ./.github/actions/build-env
+        with:
+          NODE_ENV_DEV: ${{ secrets.NODE_ENV_DEV }}
+          NODE_PORT: ${{ secrets.NODE_PORT }}
+          PG_USER: ${{ secrets.PG_USER }}
+          PG_HOST: ${{ secrets.PG_HOST }}
+          PG_DB: ${{ secrets.PG_DB }}
+          PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
+          PG_PORT: ${{ secrets.PG_PORT }}
 
       - name: Deploy Docker images 
         uses: ./.github/actions/deploy-docker-images

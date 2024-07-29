@@ -33,10 +33,6 @@ on:
     paths:
       - ".github/workflows/run_sonarcloud.yaml"
   workflow_call: 
-    inputs:
-      ENVIRONMENT:
-        required: true
-        type: string
     secrets:
       SONAR_TOKEN:
         required: true
@@ -48,7 +44,7 @@ permissions:
 jobs:
   sonarcloud-analysis:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.ENVIRONMENT }}
+    environment: Development
     steps:
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@v2.3.0

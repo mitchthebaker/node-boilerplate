@@ -12,6 +12,7 @@ jobs:
   unit-tests:
     name: Unit tests
     runs-on: ubuntu-latest
+    environment: Development
     defaults:
       run:
         working-directory: ./client-app
