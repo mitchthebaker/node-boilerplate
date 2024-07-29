@@ -60,7 +60,7 @@ jobs:
 
           until curl -I http://localhost:${{ secrets.NODE_PORT }} 2>/dev/null | grep -q "200 OK"; do
             if [ $counter -ge $max_attempts ]; then
-                echo "Timeout reached: client-app service was not ready in 30 seconds."
+                echo "Timeout reached: api-gateway service was not ready in 30 seconds."
                 exit 1
             fi
 
@@ -78,23 +78,25 @@ jobs:
     
       - name: Deploy Docker images 
         run: docker-compose -f $COMPOSE_FILE push
-
-      - name: Stop Docker
-        run: docker-compose -f $COMPOSE_FILE down -v
-      
-      #- name: Deploy api-gateway image to DockerHub
-      #  uses: ./.github/actions/dockerhub-deploy
-      #  with:
-      #    image-name: mitchthebaker/api-gateway
-      #    dockerfile: ./api-gateway/Dockerfile
-      #    context: .
-      #
-      #- name: Deploy client-app image to DockerHub
-      #  uses: ./.github/actions/dockerhub-deploy
-      #  with: 
-      #    image-name: mitchthebaker/client-app
-      #    dockerfile: ./client-app/Dockerfile
-      #    context: .
       
       - name: Log out from DockerHub
         run: docker logout
+
+      - name: Stop Docker
+        run: docker-compose -f $COMPOSE_FILE down -v
+
+# For pushing to one image
+#
+#- name: Deploy api-gateway image to DockerHub
+#  uses: ./.github/actions/dockerhub-deploy
+#  with:
+#    image-name: mitchthebaker/api-gateway
+#    dockerfile: ./api-gateway/Dockerfile
+#    context: .
+#
+#- name: Deploy client-app image to DockerHub
+#  uses: ./.github/actions/dockerhub-deploy
+#  with: 
+#    image-name: mitchthebaker/client-app
+#    dockerfile: ./client-app/Dockerfile
+#    context: .

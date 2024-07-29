@@ -7,7 +7,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node index.dev.js",
-    "start:dev": "node index.dev.js",
+    "start:dev": "nodemon index.dev.js",
     "migration": "node ./src/db/migrations/migrateTables.js",
     "build": "tsc",
     "build:watch": "tsc -w",

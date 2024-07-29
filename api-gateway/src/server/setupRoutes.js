@@ -33,6 +33,7 @@ const setupRoutes = (app) => {
         INSERT INTO messages(id, message) VALUES($1, $2) RETURNING *
       `, [newMessage.id, newMessage.message]);
 
+      console.log(result.rows[0]);
       return res.json(result.rows[0]);
     }
     catch(err) {
