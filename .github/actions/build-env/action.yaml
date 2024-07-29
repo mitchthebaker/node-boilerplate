@@ -1,0 +1,33 @@
+name: Build environment variables
+inputs:
+  NODE_ENV_DEV:
+    required: true
+  NODE_PORT:
+    required: true
+  PG_USER:
+    required: true
+  PG_HOST:
+    required: true
+  PG_DB:
+    required: true
+  PG_PASSWORD:
+    required: true
+  PG_PORT:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build .env file for api-gateway service 
+      shell: bash
+      run: |
+        cd ./api-gateway
+        touch .env 
+        echo "NODE_ENV=${{ inputs.NODE_ENV_DEV }}" >> .env
+        echo "PORT=${{ inputs.NODE_PORT }}" >> .env
+        echo "PG_USER=${{ inputs.PG_USER }}" >> .env
+        echo "PG_HOST=${{ inputs.PG_HOST }}" >> .env
+        echo "PG_DB=${{ inputs.PG_DB }}" >> .env
+        echo "PG_PASSWORD=${{ inputs.PG_PASSWORD }}" >> .env
+        echo "PG_PORT=${{ inputs.PG_PORT }}" >> .env
+        cat .env

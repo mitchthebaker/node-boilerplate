@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: "./api-gateway/Dockerfile"
+    image: mitchthebaker/api-gateway:latest
     env_file: 
       - ./api-gateway/.env
     depends_on:
@@ -16,7 +17,7 @@ services:
       - /opt/app/node_modules
 
   server-db:
-    container_name: server_db
+    container_name: server-db
     image: postgres
     environment:
       POSTGRES_DB: db
@@ -40,6 +41,7 @@ services:
     build:
       context: .
       dockerfile: "./client-app/Dockerfile"
+    image: mitchthebaker/client-app:latest
     depends_on:
       - api-gateway
     ports:

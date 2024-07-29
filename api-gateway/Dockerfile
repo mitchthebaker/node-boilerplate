@@ -2,7 +2,7 @@ FROM node
 
 WORKDIR /opt/app
 
-COPY ./api-gateway/package.json .
+COPY ./api-gateway/package*.json ./
 RUN npm install
 COPY . .
 

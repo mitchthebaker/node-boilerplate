@@ -1,0 +1,27 @@
+name: Deploy image to DockerHub
+inputs:
+  image-name:
+    required: true
+  dockerfile:
+    required: true 
+  context:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build Docker image 
+      shell: bash
+      run: docker build -t ${{ inputs.image-name }}:latest -f ${{ inputs.dockerfile }} ${{ inputs.context }}
+
+    - name: Tag Docker image with commit SHA
+      shell: bash
+      run: docker tag ${{ inputs.image-name }}:latest ${{ inputs.image-name }}:${{ github.sha }}
+
+    - name: Push Docker image (latest)
+      shell: bash
+      run: docker push ${{ inputs.image-name }}:latest
+
+    - name: Push Docker image (commit SHA)
+      shell: bash
+      run: docker push ${{ inputs.image-name }}:${{ github.sha }}
