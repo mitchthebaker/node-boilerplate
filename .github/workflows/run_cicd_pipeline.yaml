@@ -15,10 +15,12 @@ jobs:
   run-docker: 
     uses: ./.github/workflows/run_docker_containers.yaml
     secrets: inherit
+
   unit-tests: 
     uses: ./.github/workflows/run_unit_tests.yaml
     needs:
       - run-docker
+
   sonarcloud-analysis:
     uses: ./.github/workflows/run_sonarcloud.yaml
     with: 
@@ -26,3 +28,13 @@ jobs:
     secrets: inherit
     needs:
       - run-docker
+  
+  deploy-docker-images:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/actions/deploy-docker-images
+    with:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ DOCKER_PASSWORD }}
+      COMPOSE_FILE: ./docker-compose.yml
+
+  

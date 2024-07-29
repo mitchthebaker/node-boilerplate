@@ -1,0 +1,48 @@
+name: Deploy images to DockerHub
+inputs:
+  DOCKER_USERNAME:
+    required: true
+  DOCKER_PASSWORD:
+    required: true
+  COMPOSE_FILE: 
+    required: true
+
+  #image-name:
+  #  required: true
+  #dockerfile:
+  #  required: true 
+  #context:
+  #  required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ inputs.DOCKER_USERNAME }}
+        password: ${{ inputs.DOCKER_PASSWORD }}
+
+    - name: Deploy Docker images 
+      run: docker-compose -f ${{ inputs.COMPOSE_FILE }} push
+
+    - name: Log out from DockerHub
+        run: docker logout
+
+    # Deploying single image 
+    #
+    #- name: Build Docker image 
+    #  shell: bash
+    #  run: docker build -t ${{ inputs.image-name }}:latest -f ${{ inputs.dockerfile }} ${{ inputs.context }}
+
+    #- name: Tag Docker image with commit SHA
+    #  shell: bash
+    #  run: docker tag ${{ inputs.image-name }}:latest ${{ inputs.image-name }}:${{ github.sha }}
+
+    #- name: Push Docker image (latest)
+    #  shell: bash
+    #  run: docker push ${{ inputs.image-name }}:latest
+
+    #- name: Push Docker image (commit SHA)
+    #  shell: bash
+    #  run: docker push ${{ inputs.image-name }}:${{ github.sha }}
