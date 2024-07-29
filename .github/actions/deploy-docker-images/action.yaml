@@ -24,10 +24,12 @@ runs:
         password: ${{ inputs.DOCKER_PASSWORD }}
 
     - name: Deploy Docker images 
+      shell: bash
       run: docker-compose -f ${{ inputs.COMPOSE_FILE }} push
 
     - name: Log out from DockerHub
-        run: docker logout
+      shell: bash
+      run: docker logout
 
     # Deploying single image 
     #
