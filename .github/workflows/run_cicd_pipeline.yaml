@@ -30,21 +30,11 @@ jobs:
       - run-docker
   
   build:
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/build_docker_containers.yaml
+    secrets: inherit
     needs: 
       - run-docker
       - unit-tests
       - sonarcloud-analysis
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 
-
-      - name: Deploy Docker images 
-        uses: ./.github/actions/deploy-docker-images
-        with:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          COMPOSE_FILE: ./docker-compose.yml
 
   

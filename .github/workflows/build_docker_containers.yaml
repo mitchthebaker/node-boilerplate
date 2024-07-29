@@ -1,0 +1,20 @@
+name: Run the CI/CD Pipeline 
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs: 
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: Development
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 
+
+      - name: Deploy Docker images 
+        uses: ./.github/actions/deploy-docker-images
+        with:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          COMPOSE_FILE: ./docker-compose.yml
