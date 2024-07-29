@@ -2,14 +2,11 @@ name: Run the CI/CD Pipeline
 on:
   pull_request:
     types: [opened, reopened]
-    branches:
-      - "main"
   pull_request_review:
     types: [submitted]
   push: 
     branches: 
       - "main"
-      - "*build-ci*"
   workflow_dispatch:
 
 permissions: read-all
