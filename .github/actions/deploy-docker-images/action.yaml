@@ -23,7 +23,7 @@ runs:
         username: ${{ inputs.DOCKER_USERNAME }}
         password: ${{ inputs.DOCKER_PASSWORD }}
 
-    - name: Deploy Docker images 
+    - name: Deploy Docker images  
       shell: bash
       run: docker-compose -f ${{ inputs.COMPOSE_FILE }} push
 

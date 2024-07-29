@@ -1,4 +1,4 @@
-name: Run the CI/CD Pipeline 
+name: Build Docker containers and deploy to DockerHub
 on:
   workflow_call:
   workflow_dispatch:
@@ -23,9 +23,23 @@ jobs:
           PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
           PG_PORT: ${{ secrets.PG_PORT }}
 
-      - name: Deploy Docker images 
-        uses: ./.github/actions/deploy-docker-images
-        with:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          COMPOSE_FILE: ./docker-compose.yml
+      #- name: Deploy Docker images 
+      #  uses: ./.github/actions/deploy-docker-images
+      #  with:
+      #    DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      #    DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      #    COMPOSE_FILE: ./docker-compose.yml
+      
+      - name: Deploy api-gateway image
+        uses: ./.github/actions/dockerhub-deploy
+        with: 
+          image-name: api-gateway
+          dockerfile: ./api-gateway/Dockerfile
+          context: .
+      
+      - name: Deploy client-app image
+        uses: ./.github/actions/dockerhub-deploy
+        with: 
+          image-name: client-app
+          dockerfile: ./client-app/Dockerfile
+          context: .
