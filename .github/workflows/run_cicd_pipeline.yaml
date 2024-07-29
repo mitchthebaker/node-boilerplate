@@ -31,6 +31,10 @@ jobs:
   
   build:
     if: github.ref == 'refs/heads/main'
+    needs: 
+      - run-docker
+      - unit-tests
+      - sonarcloud-analysis
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 
@@ -39,7 +43,7 @@ jobs:
         uses: ./.github/actions/deploy-docker-images
         with:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ DOCKER_PASSWORD }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           COMPOSE_FILE: ./docker-compose.yml
 
   
