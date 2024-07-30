@@ -52,6 +52,13 @@ jobs:
           dockerfile: ./client-app/Dockerfile
           context: .
       
+      - name: Deploy e2e-tests image
+        uses: ./.github/actions/dockerhub-deploy
+        with: 
+          image-name: mitchthebaker/e2e-tests
+          dockerfile: ./e2e-tests/Dockerfile
+          context: .
+      
       - name: Log out from DockerHub
         shell: bash
         run: docker logout

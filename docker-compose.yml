@@ -49,3 +49,17 @@ services:
     volumes:
       - ./client-app/:/opt/app
       - /opt/app/node_modules
+    
+  e2e-tests:
+    container_name: e2e-tests
+    build:
+      context: .
+      dockerfile: "./e2e-tests/Dockerfile"
+    image: mitchthebaker/e2e-tests:latest
+    depends_on:
+      - api-gateway
+      - server-db
+      - client-app
+  
+    
+      
