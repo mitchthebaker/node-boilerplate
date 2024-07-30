@@ -12,6 +12,8 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     environment: Development
+    env: 
+      COMPOSE_FILE: ./docker-compose.yml
     defaults:
       run:
         working-directory: ./e2e-tests
