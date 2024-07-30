@@ -8,6 +8,7 @@ COPY . .
 
 # Install Playwright browsers
 RUN npx playwright install
+RUN npx playwright install-deps
 
 # Run tests
 CMD ["npx", "playwright", "test"]
