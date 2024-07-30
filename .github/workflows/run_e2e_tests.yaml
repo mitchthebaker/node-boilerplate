@@ -32,6 +32,17 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       
+      - name: Build .env files
+        uses: ./.github/actions/build-env
+        with:
+          NODE_ENV_DEV: ${{ secrets.NODE_ENV_DEV }}
+          NODE_PORT: ${{ secrets.NODE_PORT }}
+          PG_USER: ${{ secrets.PG_USER }}
+          PG_HOST: ${{ secrets.PG_HOST }}
+          PG_DB: ${{ secrets.PG_DB }}
+          PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
+          PG_PORT: ${{ secrets.PG_PORT }}
+      
       - name: Build/Run Docker
         run: |
           docker-compose -f $COMPOSE_FILE build
