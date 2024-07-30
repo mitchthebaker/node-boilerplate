@@ -8,7 +8,9 @@ This repository is set up with React, Node.js, PostgreSQL/pgadmin, and playwrigh
 
 `git clone git@github.com:mitchthebaker/node-boilerplate.git`
 
-#### Next, cd into ./api-gateway and create a .env file 
+#### Then create .env files for all services
+
+In ./api-gateway/
 
 ```
   NODE_ENV=development
@@ -20,13 +22,23 @@ This repository is set up with React, Node.js, PostgreSQL/pgadmin, and playwrigh
   PG_PASSWORD=secret
   PG_PORT=5432
 ```
-#### Next, cd into ./client-app and create a .env file 
 
-Inside .env, add the following variables: 
+
+In ./client-app/
 
 ```
   NODE_ENV=development
   REACT_APP_API_GATEWAY_URI=http://localhost:3001
+```
+
+In ./e2e-tests/
+
+```
+PG_USER=admin
+PG_HOST=localhost
+PG_DB=db
+PG_PASSWORD=secret
+PG_PORT=3101
 ```
 
 #### Update env variables in docker-compose.yml
