@@ -39,9 +39,9 @@ module.exports = defineConfig({
     //},
   ],
     // Configure web server for client-app
-    webServer: {
-      command: 'npm start',
-      url: 'http://127.0.0.1:3000',
-      reuseExistingServer: !process.env.CI,
-    },
+    //webServer: {
+    //  command: 'npm start',
+    //  url: 'http://127.0.0.1:3000',
+    //  reuseExistingServer: !process.env.CI,
+    //},
 });
