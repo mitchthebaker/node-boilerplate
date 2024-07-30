@@ -1,4 +1,6 @@
-module.exports = {
+const { defineConfig } = require("@playwright/test");
+
+module.exports = defineConfig({
   testDir: './tests',
   timeout: 10 * 1000,
   retries: 0,
@@ -13,9 +15,20 @@ module.exports = {
   },
   projects: [
     {
+      name: "setup db",
+      testMatch: /global\.setup\.js/,
+      //teardown: "cleanup db",
+    },
+    //{
+    //  name: "cleanup db",
+    //  testMatch: /global\.teardown\.js/,
+    //},
+    {
       name: 'Desktop Chromium',
       use: { browserName: 'chromium' },
+      //dependencies: ["setup db"],
     },
+    
     //{
     //  name: 'Desktop Firefox',
     //  use: { browserName: 'firefox' },
@@ -31,5 +44,4 @@ module.exports = {
       url: 'http://127.0.0.1:3000',
       reuseExistingServer: !process.env.CI,
     },
-    globalSetup: require.resolve('./setup.js'),
-};
+});

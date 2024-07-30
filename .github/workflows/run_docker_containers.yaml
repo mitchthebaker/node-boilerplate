@@ -72,19 +72,3 @@ jobs:
 
       - name: Stop Docker
         run: docker-compose -f $COMPOSE_FILE down -v
-
-# For pushing to one image
-#
-#- name: Deploy api-gateway image to DockerHub
-#  uses: ./.github/actions/dockerhub-deploy
-#  with:
-#    image-name: mitchthebaker/api-gateway
-#    dockerfile: ./api-gateway/Dockerfile
-#    context: .
-#
-#- name: Deploy client-app image to DockerHub
-#  uses: ./.github/actions/dockerhub-deploy
-#  with: 
-#    image-name: mitchthebaker/client-app
-#    dockerfile: ./client-app/Dockerfile
-#    context: .
