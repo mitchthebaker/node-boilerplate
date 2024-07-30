@@ -52,6 +52,7 @@ jobs:
       - name: Run Playwright tests 
         run: |
           cd ./e2e-tests
+          npm install
           npx playwright test
       
       - name: Stop Docker
