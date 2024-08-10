@@ -57,7 +57,7 @@ jobs:
       - name: Run Playwright tests 
         run: |
           cd ./e2e-tests
-          docker run --net="host" --rm mitchthebaker/e2e-tests
+          docker compose run --net="host" --rm mitchthebaker/e2e-tests
       
       - name: Stop Docker
         run: docker-compose -f $COMPOSE_FILE down -v
