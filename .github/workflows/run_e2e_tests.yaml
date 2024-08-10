@@ -45,8 +45,8 @@ jobs:
       
       - name: Build/Run Docker
         run: |
-          docker-compose -f $COMPOSE_FILE build
-          docker-compose -f $COMPOSE_FILE up -d
+          docker compose -f $COMPOSE_FILE build
+          docker compose -f $COMPOSE_FILE up -d
       
       - name: Login to DockerHub
         uses: docker/login-action@v2
