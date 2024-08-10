@@ -56,7 +56,7 @@ jobs:
       
       - name: Run Playwright tests 
         run: |
-          cd ./e2e-tests
+          #cd ./e2e-tests
           docker compose run --rm mitchthebaker/e2e-tests
       
       - name: Stop Docker
