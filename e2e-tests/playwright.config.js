@@ -5,7 +5,7 @@ module.exports = defineConfig({
   timeout: 10 * 1000,
   retries: 0,
   use: {
-    //baseUrl: "http://127.0.0.1:3000",
+    baseUrl: "http://localhost:3000",
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     headless: true,
@@ -38,10 +38,10 @@ module.exports = defineConfig({
     //  use: { browserName: 'webkit' },
     //},
   ],
-    // Configure web server for client-app
-    //webServer: {
-    //  command: 'npm start',
-    //  url: 'http://127.0.0.1:3000',
-    //  reuseExistingServer: !process.env.CI,
-    //},
+  // Configure web server for client-app
+  webServer: {
+    command: 'npm start',
+    url: 'http://localhost:3000',
+    reuseExistingServer: !process.env.CI,
+  },
 });
