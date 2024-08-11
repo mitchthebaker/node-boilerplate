@@ -65,6 +65,7 @@ jobs:
       - name: Run Playwright tests 
         run: |
           cd ./e2e-tests
+          docker compose ps
           npx playwright test
 
       - name: Stop Docker
