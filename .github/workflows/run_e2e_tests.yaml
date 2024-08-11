@@ -19,10 +19,6 @@ jobs:
     services:
       api-gateway:
         image: mitchthebaker/api-gateway:latest
-        env_file: 
-          - ./api-gateway/.env
-        depends_on:
-          - server-db
         ports:
           - "3001:3001"
       server-db:
@@ -35,16 +31,10 @@ jobs:
           - "3101:5432"
       client-app:
         image: mitchthebaker/client-app:latest
-        depends_on:
-          - api-gateway
         ports:
           - "3000:3000"
       e2e-tests:
         image: mitchthebaker/e2e-tests:latest
-        depends_on:
-          - api-gateway
-          - server-db
-          - client-app
 
     steps: 
       - name: Checkout repository
