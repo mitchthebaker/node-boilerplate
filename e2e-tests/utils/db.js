@@ -19,7 +19,6 @@ class DB {
     try {
       if (!this.pool) {
         this.pool = new Pool(this.DBConfig);
-        console.log(`√ DB connection has been established!`);
       }
       return this.pool;
     } 
@@ -53,4 +52,6 @@ class DB {
   }
 }
 
-module.exports = { DB };
+let db = new DB();
+
+module.exports = { db };

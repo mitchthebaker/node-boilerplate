@@ -17,12 +17,12 @@ module.exports = defineConfig({
     {
       name: "setup db",
       testMatch: /global\.setup\.js/,
-      //teardown: "cleanup db",
+      teardown: "cleanup db",
     },
-    //{
-    //  name: "cleanup db",
-    //  testMatch: /global\.teardown\.js/,
-    //},
+    {
+      name: "cleanup db",
+      testMatch: /global\.teardown\.js/,
+    },
     {
       name: 'Desktop Chromium',
       use: { browserName: 'chromium' },

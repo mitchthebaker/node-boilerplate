@@ -1,7 +1,5 @@
 const { test, expect } = require("@playwright/test");
-const { DB } = require("../utils/db");
-
-let db = new DB();
+const { db } = require("../utils/db");
 
 test.describe("Form Submission E2E Test", () => {
   test("should submit form and save data to the database", async ({ page }) => {
@@ -12,24 +10,16 @@ test.describe("Form Submission E2E Test", () => {
     await page.fill('input[id="message-input"]', "Playwright test message");
     await page.click('button[id="submission-button"]');
 
-    await db.getConnection();
-
+    // Check if form submission adds row to the db
     if(db) {
       const result = await db.executeQuery(
         "SELECT * FROM messages WHERE message = $1", 
         ["Playwright test message"]
       );
-      console.log(result.rows);
       expect(result.rows).toHaveLength(1);
       
       await page.reload();
       await expect(page.locator("text=Playwright test message")).toBeVisible();
-
-      await db.executeQuery(
-        "DELETE FROM messages WHERE message = $1", 
-        ["Playwright test message"]
-      );
-      await db.removeConnection();
     }
   });
 });
