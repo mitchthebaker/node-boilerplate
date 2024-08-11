@@ -4,7 +4,7 @@ on:
     paths:
       - ".github/workflows/run_e2e_tests.yaml"
     branches:
-      - "*e2e-tests"
+      - "*-e2e-tests"
   workflow_call:
   workflow_dispatch:
 

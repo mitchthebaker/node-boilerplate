@@ -38,7 +38,7 @@ runs:
         cd ./e2e-tests
         touch .env
         echo "PG_USER=${{ inputs.PG_USER }}" >> .env
-        echo "PG_HOST=postgres" >> .env
+        echo "PG_HOST=server-db" >> .env
         echo "PG_DB=${{ inputs.PG_DB }}" >> .env
         echo "PG_PASSWORD=${{ inputs.PG_PASSWORD }}" >> .env
         echo "PG_PORT=${{ inputs.PG_PORT }}" >> .env
