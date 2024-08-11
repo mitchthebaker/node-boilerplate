@@ -3,6 +3,8 @@ on:
   push:
     paths:
       - ".github/workflows/run_e2e_tests.yaml"
+    branches:
+      - "build-e2e-tests"
   workflow_call:
   workflow_dispatch:
 
