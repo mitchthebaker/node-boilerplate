@@ -19,7 +19,7 @@ jobs:
     steps: 
       - name: Checkout repository
         uses: actions/checkout@v4 
-      
+
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
@@ -33,7 +33,7 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      
+
       - name: Build .env files
         uses: ./.github/actions/build-env
         with:
