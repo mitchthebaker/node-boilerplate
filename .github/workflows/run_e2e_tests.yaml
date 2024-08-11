@@ -23,10 +23,6 @@ jobs:
           - "3001:3001"
       server-db:
         image: postgres
-        environment:
-          POSTGRES_DB: db
-          POSTGRES_USER: admin
-          POSTGRES_PASSWORD: secret
         ports:
           - "3101:5432"
       client-app:
