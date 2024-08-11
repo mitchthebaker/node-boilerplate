@@ -19,6 +19,7 @@ class DB {
     try {
       if (!this.pool) {
         this.pool = new Pool(this.DBConfig);
+        console.log("Connected to database");
       }
       return this.pool;
     } 

@@ -64,12 +64,7 @@ jobs:
 
       - name: Run Playwright tests 
         run: |
-          for i in {1..10}; do
-            docker-compose exec server-db pg_isready -U ${{ secrets.PG_USER }} -d ${{ secrets.PG_DB }} && break
-            docker compose ps
-            echo "Waiting for server-db to be healthy..."
-            sleep 5
-          done
+          docker compose ps
           cd ./e2e-tests
           npx playwright test
 
