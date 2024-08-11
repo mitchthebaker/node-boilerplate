@@ -16,8 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "test-ct": "playwright test -c playwright-ct.config.js"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

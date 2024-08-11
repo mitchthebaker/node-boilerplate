@@ -39,9 +39,11 @@ module.exports = defineConfig({
     //},
   ],
   // Configure web server for client-app
-  webServer: {
-    command: 'npm start',
-    url: 'http://localhost:3000',
-    reuseExistingServer: true,
-  },
+  webServer: [
+    {
+      command: 'docker run --rm mitchthebaker/client-app',
+      url: 'http://localhost:3000',
+      reuseExistingServer: true,
+    },
+  ]
 });
