@@ -5,7 +5,7 @@ module.exports = defineConfig({
   timeout: 10 * 1000,
   retries: 1,
   use: {
-    baseUrl: "http://localhost:3000",
+    //baseUrl: "http://localhost:3000",
     ignoreHTTPSErrors: true,
     headless: true,
     screenshot: 'only-on-failure',
@@ -41,8 +41,13 @@ module.exports = defineConfig({
   // Configure web server for client-app
   webServer: [
     {
-      command: 'npm start',
+      command: 'npm start:client',
       url: 'http://localhost:3000',
+      reuseExistingServer: true,
+    },
+    {
+      command: 'npm start:api-gateway',
+      url: 'http://localhost:3001',
       reuseExistingServer: true,
     },
   ]

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm start --prefix ../client-app"
+    "start:client": "npm start --prefix ../client-app",
+    "start:api-gateway": "nodemon index.dev.js --prefix ../api-gateway"
   },
   "keywords": [],
   "author": "",
