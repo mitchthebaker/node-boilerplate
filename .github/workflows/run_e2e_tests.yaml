@@ -51,16 +51,19 @@ jobs:
           docker compose -f $COMPOSE_FILE build
           docker compose -f $COMPOSE_FILE up -d
 
-      - name: Install Playwright
-        run: |
-          cd ./e2e-tests
-          npm ci
-          npx playwright install --with-deps
-
+      #- name: Install Playwright
+      #  run: |
+      #    cd ./e2e-tests
+      #    npm ci
+      #    npx playwright install --with-deps
+#
+      #- name: Run Playwright tests 
+      #  run: |
+      #    cd ./e2e-tests
+      #    npx playwright test    
       - name: Run Playwright tests 
         run: |
-          cd ./e2e-tests
-          npx playwright test    
+          docker run -rm mitchthebaker/e2e-tests
 
       - name: Stop Docker
         run: docker-compose -f $COMPOSE_FILE down -v
