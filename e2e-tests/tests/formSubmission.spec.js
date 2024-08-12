@@ -9,6 +9,7 @@ test.describe("Form Submission E2E Test", () => {
     // Fill out the form
     await page.fill('input[id="message-input"]', "Playwright test message");
     await page.click('button[id="submission-button"]');
+    await page.reload({ waitUntil: "load" });
 
     // Check if form submission adds row to the db
     if(db) {
@@ -18,7 +19,6 @@ test.describe("Form Submission E2E Test", () => {
       );
       console.log(result.rows);
       
-      await page.reload({ waitUntil: "load" });
       const message = page.getByText("Playwright test message");
       await message.waitFor();
       await expect(message).toBeVisible();
