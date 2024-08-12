@@ -9,10 +9,6 @@ class DB {
     database: process.env.PG_DB,
     password: process.env.PG_PASSWORD,
     port: process.env.PG_PORT,
-    max: 10,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
-    allowExitOnIdle: false,
   };
 
   async getConnection() {

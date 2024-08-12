@@ -8,7 +8,7 @@ module.exports = defineConfig({
     baseUrl: "http://localhost:3000",
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
-    headless: true,
+    headless: false,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'retain-on-failure',
@@ -26,7 +26,7 @@ module.exports = defineConfig({
     {
       name: 'Desktop Chromium',
       use: { browserName: 'chromium' },
-      //dependencies: ["setup db"],
+      dependencies: ["setup db"],
     },
     
     //{
