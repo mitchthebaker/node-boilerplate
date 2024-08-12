@@ -12,6 +12,10 @@ test.describe("Form Submission E2E Test", () => {
 
     // Check if form submission adds row to the db
     if(db) {
+      const res = await db.executeQuery(
+        "SELECT * FROM messages ", 
+      );
+      console.log(res.rows);
       const result = await db.executeQuery(
         "SELECT * FROM messages WHERE message = $1", 
         ["Playwright test message"]
