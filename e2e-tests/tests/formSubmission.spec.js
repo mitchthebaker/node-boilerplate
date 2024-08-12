@@ -20,6 +20,10 @@ test.describe("Form Submission E2E Test", () => {
       
       await page.reload();
       await expect(page.locator("text=Playwright test message")).toBeVisible();
+      await db.executeQuery(
+        "DELETE FROM messages WHERE message = $1", 
+        ["Playwright test message"]
+      );
     }
   });
 });

@@ -5,7 +5,7 @@ module.exports = defineConfig({
   timeout: 10 * 1000,
   retries: 0,
   use: {
-    //baseUrl: "http://localhost:3000",
+    baseUrl: "http://localhost:3000",
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     headless: true,
@@ -28,22 +28,22 @@ module.exports = defineConfig({
       use: { browserName: 'chromium' },
       dependencies: ["setup db"],
     },
-    
-    //{
-    //  name: 'Desktop Firefox',
-    //  use: { browserName: 'firefox' },
-    //},
+    {
+      name: 'Desktop Firefox',
+      use: { browserName: 'firefox' },
+      dependencies: ["setup db"],
+    },
     //{
     //  name: 'Desktop WebKit',
     //  use: { browserName: 'webkit' },
     //},
   ],
   // Configure web server for client-app
-  //webServer: [
-  //  {
-  //    command: 'npm start',
-  //    url: 'http://localhost:3000',
-  //    reuseExistingServer: true,
-  //  },
-  //]
+  webServer: [
+    {
+      command: 'npm start',
+      url: 'http://localhost:3000',
+      reuseExistingServer: true,
+    },
+  ]
 });

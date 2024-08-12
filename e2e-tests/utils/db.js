@@ -13,7 +13,7 @@ class DB {
 
   async getConnection() {
     try {
-      if (!this.pool) {
+      if (this.pool === null || this.pool === undefined) {
         this.pool = new Pool(this.DBConfig);
         console.log("Connected to database");
       }
@@ -49,6 +49,6 @@ class DB {
   }
 }
 
-let db = new DB();
+const db = new DB();
 
 module.exports = { db };
