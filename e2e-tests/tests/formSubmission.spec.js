@@ -20,6 +20,7 @@ test.describe("Form Submission E2E Test", () => {
       
       await page.reload({ waitUntil: "load" });
       const message = page.getByText("Playwright test message");
+      await message.waitFor();
       await expect(message).toBeVisible();
       await db.executeQuery(
         "DELETE FROM messages WHERE message = $1", 
