@@ -8,7 +8,7 @@ module.exports = defineConfig({
     baseUrl: "http://localhost:3000",
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
-    headless: false,
+    headless: true,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'retain-on-failure',
