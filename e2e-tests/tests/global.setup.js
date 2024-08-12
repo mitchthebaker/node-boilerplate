@@ -17,8 +17,7 @@ setup("Setup tests", async ({ page }) => {
       
       ALTER TABLE IF EXISTS public.messages
           OWNER to admin;
-    `)
-    console.log("Created messages table");
+    `);
   }
   catch(err) {
     console.error(`Error creating messages table, ${err}`)
