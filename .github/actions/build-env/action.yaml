@@ -3,7 +3,8 @@ inputs:
   NODE_ENV_DEV:
     required: true
   REACT_APP_API_GATEWAY_URI:
-    required: true
+    required: false
+    default: ""
   NODE_PORT:
     required: true
   PG_USER:

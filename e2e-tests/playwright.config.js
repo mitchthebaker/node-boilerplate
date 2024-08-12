@@ -8,9 +8,9 @@ module.exports = defineConfig({
     baseUrl: "http://127.0.0.1:3000",
     ignoreHTTPSErrors: true,
     headless: true,
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-    trace: 'retain-on-failure',
+    //screenshot: 'only-on-failure',
+    //video: 'retain-on-failure',
+    //trace: 'retain-on-failure',
   },
   projects: [
     {
