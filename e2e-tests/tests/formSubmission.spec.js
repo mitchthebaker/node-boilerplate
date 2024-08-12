@@ -16,6 +16,7 @@ test.describe("Form Submission E2E Test", () => {
         "SELECT * FROM messages WHERE message = $1", 
         ["Playwright test message"]
       );
+      console.log(result);
       expect(result.rows).toHaveLength(1);
       
       await page.reload();
