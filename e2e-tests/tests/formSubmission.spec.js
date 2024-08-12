@@ -5,28 +5,19 @@ test.describe("Form Submission E2E Test", () => {
   test("should submit form and save data to the database", async ({ page }) => {
     // Navigate to the client-app
     await page.goto("http://127.0.0.1:3000/");
-
-    // Intercept and block requests for specific files
-    await page.route('**/*.{png,json}', route => {
-      const url = route.request().url();
-      if (url.includes('logo192.png') || url.includes('logo512.png')) {
-        route.abort();  // Block the request
-      } else {
-        route.continue();  // Allow other requests
-      }
-    });
+    await page.waitForLoadState("networkidle");
 
     // Fill out the form
     await expect(page.getByText("Send a message")).toBeVisible();
     await page.fill('input[id="message-input"]', "Playwright test message");
     
-    const responsePromise = page.waitForResponse(res => {
-      console.log(res.url(), res.status());
-      return res.status() === 200
-    });
+    const responsePromise = page.waitForResponse(res => 
+      res.url().includes("/messages") && 
+      res.status() === 200
+    );
     await page.click('button[id="submission-button"]');
     const response = await responsePromise;
-    console.log(response);
+    console.log(response.url(), response.status());
 
     // Check if form submission adds row to the db
     if(db && response.status === 200) {
