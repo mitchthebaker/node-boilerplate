@@ -4,13 +4,14 @@ const { db } = require("../utils/db");
 test.describe("Form Submission E2E Test", () => {
   test("should submit form and save data to the database", async ({ page }) => {
     // Navigate to the client-app
-    await page.goto("http://127.0.0.1:3000");
+    await page.goto("http://127.0.0.1:3000/");
 
     // Fill out the form
     await expect(page.getByText("Send a message")).toBeVisible();
     await page.fill('input[id="message-input"]', "Playwright test message");
 
     const responsePromise = page.waitForResponse(res =>
+      res.url().includes("/messages") &&
       res.status() === 200
     );
     await page.click('button[id="submission-button"]');
