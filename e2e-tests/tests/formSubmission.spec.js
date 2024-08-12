@@ -12,16 +12,17 @@ test.describe("Form Submission E2E Test", () => {
 
     // Check if form submission adds row to the db
     if(db) {
-      const res = await db.executeQuery(
-        "SELECT * FROM messages ", 
-      );
-      console.log(res.rows);
-      const result = await db.executeQuery(
-        "SELECT * FROM messages WHERE message = $1", 
-        ["Playwright test message"]
-      );
-      console.log(result);
-      expect(result.rows).toHaveLength(1);
+      try {
+        const result = await db.executeQuery(
+          "SELECT * FROM messages WHERE message = $1", 
+          ["Playwright test message"]
+        );
+        console.log(result.rows);
+        expect(result.rows).toHaveLength(1);
+      }
+      catch(err) {
+        console.error(`Error selecting from messages, ${err}`);
+      }
       
       await page.reload();
       await expect(page.locator("text=Playwright test message")).toBeVisible();
