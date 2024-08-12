@@ -2,7 +2,7 @@ require('dotenv').config();
 const { test: setup } = require("@playwright/test");
 const { db } = require("../utils/db");
 
-setup("Setup tests", async () => {
+setup("Setup tests", async ({ page }) => {
   await db.getConnection();
   try {
     await db.executeQuery(`
@@ -23,4 +23,14 @@ setup("Setup tests", async () => {
   catch(err) {
     console.error(`Error creating messages table, ${err}`)
   }
+
+  // Intercept and block requests for specific files
+  await page.route('**/*.{png,json}', route => {
+    const url = route.request().url();
+    if (url.includes('logo192.png') || url.includes('logo512.png')) {
+      route.abort();  // Block the request
+    } else {
+      route.continue();  // Allow other requests
+    }
+  });
 });
