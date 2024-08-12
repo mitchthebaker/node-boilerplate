@@ -66,6 +66,6 @@ jobs:
           docker run --rm mitchthebaker/e2e-tests
 
       - name: Stop Docker
-        run: docker-compose -f $COMPOSE_FILE down -v
+        run: docker compose -f $COMPOSE_FILE down -v
 
 
