@@ -42,12 +42,12 @@ module.exports = defineConfig({
   webServer: [
     {
       command: 'npm start:client',
-      url: 'http://localhost:3000',
+      url: 'http://127.0.0.1:3000',
       reuseExistingServer: true,
     },
     {
       command: 'npm start:api-gateway',
-      url: 'http://localhost:3001',
+      url: 'http://127.0.0.1:3001',
       reuseExistingServer: true,
     },
   ]
