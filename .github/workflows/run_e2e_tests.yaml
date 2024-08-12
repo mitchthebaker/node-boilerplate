@@ -38,7 +38,7 @@ jobs:
             ./api-gateway
             ./client-app
             ./e2e-tests
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          key: ${{ runner.os }}-cache
 
       - name: Build .env files
         uses: ./.github/actions/build-env
@@ -57,25 +57,25 @@ jobs:
           docker compose -f $COMPOSE_FILE build
           docker compose -f $COMPOSE_FILE up -d
 
-      #- name: Install Playwright
-      #  run: |
-      #    cd ./e2e-tests
-      #    npm ci
-      #    npx playwright install --with-deps
-#
-      #- name: Run Playwright tests 
-      #  run: |
-      #    cd ./e2e-tests
-      #    npx playwright test    
-      - name: Run Playwright tests
+      - name: Install Playwright
         run: |
-          docker run --rm mitchthebaker/e2e-tests
-          docker logs mitchthebaker/e2e-tests
+          cd ./e2e-tests
+          npm ci
+          npx playwright install --with-deps
+
+      - name: Run Playwright tests 
+        run: |
+          cd ./e2e-tests
+          npx playwright test    
+      #- name: Run Playwright tests
+      #  run: |
+      #    docker run --rm mitchthebaker/e2e-tests
+      #    docker logs mitchthebaker/e2e-tests
 
       - name: Stop Docker
         run: docker compose -f $COMPOSE_FILE down -v
       
-      - name: Save Primes
+      - name: Save cache
         id: cache-save
         uses: actions/cache/save@v4
         with:
