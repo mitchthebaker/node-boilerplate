@@ -23,14 +23,4 @@ setup("Setup tests", async ({ page }) => {
   catch(err) {
     console.error(`Error creating messages table, ${err}`)
   }
-
-  // Intercept and block requests for specific files
-  await page.route('**/*.{png,json}', route => {
-    const url = route.request().url();
-    if (url.includes('logo192.png') || url.includes('logo512.png')) {
-      route.abort();  // Block the request
-    } else {
-      route.continue();  // Allow other requests
-    }
-  });
 });

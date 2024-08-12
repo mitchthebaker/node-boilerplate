@@ -42,6 +42,8 @@ services:
       context: .
       dockerfile: "./client-app/Dockerfile"
     image: mitchthebaker/client-app:latest
+    env_file: 
+      - ./client-app/.env
     depends_on:
       - api-gateway
     ports:
