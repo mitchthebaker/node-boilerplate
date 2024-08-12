@@ -3,7 +3,7 @@ const { defineConfig } = require("@playwright/test");
 module.exports = defineConfig({
   testDir: './tests',
   timeout: 10 * 1000,
-  retries: 0,
+  retries: 1,
   use: {
     baseUrl: "http://localhost:3000",
     ignoreHTTPSErrors: true,

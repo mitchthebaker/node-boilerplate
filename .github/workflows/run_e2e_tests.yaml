@@ -59,7 +59,7 @@ jobs:
       - name: Install Playwright
         run: |
           cd ./e2e-tests
-          npm ci
+          npm install
           npx playwright install --with-deps
 
       - name: Run Playwright tests 
@@ -73,4 +73,4 @@ jobs:
 
       - name: Stop Docker
         run: docker-compose -f $COMPOSE_FILE down -v
-        
+
