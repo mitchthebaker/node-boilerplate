@@ -15,7 +15,6 @@ class DB {
     try {
       if (this.pool === null || this.pool === undefined) {
         this.pool = new Pool(this.DBConfig);
-        console.log("Connected to database");
       }
       return this.pool;
     } 

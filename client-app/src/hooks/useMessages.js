@@ -6,7 +6,8 @@ export const useMessages = () => {
 
   useEffect(() => {
     // Send a request to api-gateway, whose URI is specified in .env
-    axios.get(`${process.env.REACT_APP_API_GATEWAY_URI}/messages`).then(result => {
+    axios.get(`${process.env.REACT_APP_API_GATEWAY_URI}/messages`)
+    .then(result => {
       const data = result.data;
       setMessages(data);
     })

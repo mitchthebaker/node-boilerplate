@@ -30,7 +30,14 @@ runs:
         echo "PG_DB=${{ inputs.PG_DB }}" >> .env
         echo "PG_PASSWORD=${{ inputs.PG_PASSWORD }}" >> .env
         echo "PG_PORT=${{ inputs.PG_PORT }}" >> .env
-        cat .env
+    
+    - name: Build .env file for client-app service
+      shell: bash
+      run: |
+        cd ./client-app
+        touch .env
+        echo "NODE_ENV=${{ inputs.NODE_ENV_DEV }}" >> .env
+        echo "REACT_APP_API_GATEWAY_URI=${{ inputs.REACT_APP_API_GATEWAY_URI }}" >> .env
 
     - name: Build .env file for e2e-tests service
       shell: bash
@@ -42,4 +49,3 @@ runs:
         echo "PG_DB=${{ inputs.PG_DB }}" >> .env
         echo "PG_PASSWORD=${{ inputs.PG_PASSWORD }}" >> .env
         echo "PG_PORT=3101" >> .env
-        cat .env

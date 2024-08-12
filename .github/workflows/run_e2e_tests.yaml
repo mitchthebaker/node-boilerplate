@@ -38,6 +38,7 @@ jobs:
         uses: ./.github/actions/build-env
         with:
           NODE_ENV_DEV: ${{ secrets.NODE_ENV_DEV }}
+          REACT_APP_API_GATEWAY_URI: ${{ secrets.REACT_APP_API_GATEWAY_URI }}
           NODE_PORT: ${{ secrets.NODE_PORT }}
           PG_USER: ${{ secrets.PG_USER }}
           PG_HOST: ${{ secrets.PG_HOST }}
@@ -59,16 +60,15 @@ jobs:
       - name: Install Playwright
         run: |
           cd ./e2e-tests
-          npm install
+          npm ci
           npx playwright install --with-deps
 
       - name: Run Playwright tests 
         run: |
           cd ./e2e-tests
-          npx playwright test
-          docker logs -f api-gateway      
+          npx playwright test    
 
       - name: Stop Docker
         run: docker-compose -f $COMPOSE_FILE down -v
-        
+
 
