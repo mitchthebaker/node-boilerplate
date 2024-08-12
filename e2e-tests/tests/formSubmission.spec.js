@@ -10,10 +10,10 @@ test.describe("Form Submission E2E Test", () => {
     await expect(page.getByText("Send a message")).toBeVisible();
     await page.fill('input[id="message-input"]', "Playwright test message");
 
-    const responsePromise = page.waitForResponse(res =>
-      res.url().includes("/messages") &&
-      res.status() === 200
-    );
+    const responsePromise = page.waitForResponse(res => {
+      console.log(res.url(), res.status());
+      return res.url().includes("/messages") && res.status() === 200
+    });
     await page.click('button[id="submission-button"]');
     const response = await responsePromise;
     console.log(response);
