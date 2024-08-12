@@ -65,7 +65,7 @@ jobs:
       - name: Run Playwright tests 
         run: |
           cd ./e2e-tests
-          npx playwright test
+          npx playwright test 
 
       - name: Stop Docker
         run: docker-compose -f $COMPOSE_FILE down -v

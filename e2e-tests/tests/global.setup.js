@@ -4,7 +4,9 @@ const { db } = require("../utils/db");
 
 setup("Setup tests", async () => {
   await db.getConnection();
-  await db.executeQuery(`
+  
+  try {
+    await db.executeQuery(`
     CREATE TABLE IF NOT EXISTS public.messages
     (
         id character varying(36) COLLATE pg_catalog."default" NOT NULL,
@@ -17,4 +19,8 @@ setup("Setup tests", async () => {
     ALTER TABLE IF EXISTS public.messages
         OWNER to admin;
   `)
+  }
+  catch(err) {
+    console.error(`Error creating messages table, ${err}`)
+  }
 });
