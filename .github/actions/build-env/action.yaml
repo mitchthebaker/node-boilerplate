@@ -2,6 +2,8 @@ name: Build environment variables
 inputs:
   NODE_ENV_DEV:
     required: true
+  REACT_APP_API_GATEWAY_URI:
+    required: true
   NODE_PORT:
     required: true
   PG_USER:
