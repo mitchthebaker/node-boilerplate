@@ -6,7 +6,6 @@ module.exports = defineConfig({
   retries: 0,
   use: {
     baseUrl: "http://localhost:3000",
-    viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     headless: true,
     screenshot: 'only-on-failure',
@@ -36,6 +35,7 @@ module.exports = defineConfig({
     //{
     //  name: 'Desktop WebKit',
     //  use: { browserName: 'webkit' },
+    //  dependencies: ["setup db"],
     //},
   ],
   // Configure web server for client-app
