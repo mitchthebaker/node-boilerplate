@@ -5,7 +5,6 @@ test.describe("Form Submission e2e Test", () => {
   test("should submit form and save data to the database", async ({ page }) => {
     // Navigate to the client-app
     await page.goto("http://client-app:3000");
-    await page.waitForLoadState("networkidle");
 
     // Fill out the form
     await expect(page.getByText("Send a message")).toBeVisible();
