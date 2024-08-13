@@ -43,7 +43,7 @@ services:
       dockerfile: "./client-app/Dockerfile"
     image: mitchthebaker/client-app:latest
     env_file: 
-      - ./client-app/.env
+      - ./client-app/.env.local
     depends_on:
       - api-gateway
     ports:
@@ -52,18 +52,22 @@ services:
       - ./client-app/:/opt/app
       - /opt/app/node_modules
     
-  #e2e-tests:
-  #  container_name: e2e-tests
-  #  build:
-  #    context: .
-  #    dockerfile: "./e2e-tests/Dockerfile"
-  #  image: mitchthebaker/e2e-tests:latest
-  #  env_file: 
-  #    - ./e2e-tests/.env
-  #  depends_on:
-  #    - api-gateway
-  #    - server-db
-  #    - client-app
+  e2e-tests:
+    container_name: e2e-tests
+    command: npm run test
+    build:
+      context: .
+      dockerfile: "./e2e-tests/Dockerfile"
+    image: mitchthebaker/e2e-tests:latest
+    env_file: 
+      - ./e2e-tests/.env.test.local
+    depends_on:
+      - api-gateway
+      - server-db
+      - client-app
+    volumes:
+      - ./e2e-tests/:/opt/app
+      - /opt/app/node_modules
   
     
       
