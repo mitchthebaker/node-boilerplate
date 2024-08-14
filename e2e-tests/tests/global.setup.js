@@ -5,19 +5,19 @@ const { db } = require("../utils/db");
 setup("Setup tests", async ({ page }) => {
   await db.getConnection();
   try {
-    //await db.executeQuery(`
-    //  CREATE TABLE IF NOT EXISTS public.messages
-    //  (
-    //      id character varying(36) COLLATE pg_catalog."default" NOT NULL,
-    //      message character varying(500) COLLATE pg_catalog."default" NOT NULL,
-    //      CONSTRAINT messages_pkey PRIMARY KEY (id)
-    //  )
-    //  
-    //  TABLESPACE pg_default;
-    //  
-    //  ALTER TABLE IF EXISTS public.messages
-    //      OWNER to admin;
-    //`);
+    await db.executeQuery(`
+      CREATE TABLE IF NOT EXISTS public.messages
+      (
+          id character varying(36) COLLATE pg_catalog."default" NOT NULL,
+          message character varying(500) COLLATE pg_catalog."default" NOT NULL,
+          CONSTRAINT messages_pkey PRIMARY KEY (id)
+      )
+      
+      TABLESPACE pg_default;
+      
+      ALTER TABLE IF EXISTS public.messages
+          OWNER to admin;
+    `);
     // Intercept and block requests for specific files
     await page.route('**/*.{png,json}', route => {
       const url = route.request().url();
