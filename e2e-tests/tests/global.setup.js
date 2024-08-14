@@ -1,6 +1,4 @@
-require('dotenv').config({
-  path: process.env.NODE_ENV === "test" ? ".env.test.local" : ".env.local"
-});
+require('dotenv').config();
 const { test: setup } = require("@playwright/test");
 const { db } = require("../utils/db");
 
