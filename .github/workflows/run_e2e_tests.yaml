@@ -16,6 +16,7 @@ jobs:
     environment: Development
     env: 
       COMPOSE_FILE: ./docker-compose.yml
+      CI_COMPOSE_FILE: ./docker-compose.ci.yml
     steps: 
       - name: Checkout repository
         uses: actions/checkout@v4 
@@ -54,15 +55,15 @@ jobs:
 
       - name: Build/Run Docker
         run: |
-          docker compose -f $COMPOSE_FILE build
-          docker compose -f $COMPOSE_FILE up -d
+          docker compose -f $COMPOSE_FILE -f $CI_COMPOSE_FILE build
+          docker compose -f $COMPOSE_FILE -f $CI_COMPOSE_FILE up -d
   
       - name: Run Playwright tests
         run: |
-          docker compose -f $COMPOSE_FILE run e2e-tests
+          docker compose -f $COMPOSE_FILE -f $CI_COMPOSE_FILE run e2e-tests
 
       - name: Stop Docker
-        run: docker compose -f $COMPOSE_FILE down -v
+        run: docker compose -f $COMPOSE_FILE -f $CI_COMPOSE_FILE down -v
       
       - name: Save cache
         id: cache-save

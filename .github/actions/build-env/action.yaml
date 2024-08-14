@@ -38,7 +38,7 @@ runs:
       shell: bash
       run: |
         cd ./client-app
-        touch .env.local
+        touch .env.test.local
         echo "NODE_ENV=${{ inputs.NODE_ENV_DEV }}" >> .env.local
         echo "REACT_APP_API_GATEWAY_URI=${{ inputs.REACT_APP_API_GATEWAY_URI }}" >> .env.local
 
