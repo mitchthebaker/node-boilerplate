@@ -4,7 +4,6 @@ inputs:
     required: true
   REACT_APP_API_GATEWAY_URI:
     required: false
-    default: ""
   NODE_PORT:
     required: true
   PG_USER:
@@ -34,7 +33,7 @@ runs:
         echo "PG_PASSWORD=${{ inputs.PG_PASSWORD }}" >> .env
         echo "PG_PORT=${{ inputs.PG_PORT }}" >> .env
     
-    - name: Build .env file for client-app service
+    - name: Build .env.test.local file for client-app service
       shell: bash
       run: |
         cd ./client-app
