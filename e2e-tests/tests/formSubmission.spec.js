@@ -10,16 +10,16 @@ test.describe("Form Submission e2e Test", () => {
     await expect(page.getByText("Send a message")).toBeVisible();
     await page.fill('input[id="message-input"]', "Playwright test message");
     
-    const responsePromise = page.waitForResponse(res => 
-      res.url().includes("/messages") && 
-      res.status() === 200
-    );
+    //const responsePromise = page.waitForResponse(res => 
+    //  res.url().includes("/messages") && 
+    //  res.status() === 200
+    //);
     await page.click('button[id="submission-button"]');
-    const response = await responsePromise;
-    console.log(response.url(), response.status());
+    //const response = await responsePromise;
+    //console.log(response.url(), response.status());
 
     // Check if form submission adds row to the db
-    if(db && response.status === 200) {
+    if(db) {
       const result = await db.executeQuery(
         "SELECT * FROM messages WHERE message = $1", 
         ["Playwright test message"]
