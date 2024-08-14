@@ -39,8 +39,8 @@ runs:
       run: |
         cd ./client-app
         touch .env.test.local
-        echo "NODE_ENV=${{ inputs.NODE_ENV_DEV }}" >> .env.local
-        echo "REACT_APP_API_GATEWAY_URI=${{ inputs.REACT_APP_API_GATEWAY_URI }}" >> .env.local
+        echo "NODE_ENV=${{ inputs.NODE_ENV_DEV }}" >> .env.test.local
+        echo "REACT_APP_API_GATEWAY_URI=${{ inputs.REACT_APP_API_GATEWAY_URI }}" >> .env.test.local
 
     - name: Build .env file for e2e-tests service
       shell: bash
