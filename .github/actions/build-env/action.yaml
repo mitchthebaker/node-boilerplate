@@ -55,4 +55,4 @@ runs:
         echo "PG_DB=${{ inputs.PG_DB }}" >> .env.test.local
         echo "PG_PASSWORD=${{ inputs.PG_PASSWORD }}" >> .env.test.local
         echo "PG_PORT=${{ inputs.PG_PORT }}" >> .env.test.local
-        echo "CLIENT_APP_URI"=${{ inputs.CLIENT_APP_URI }} >> .env.test.local
+        echo "CLIENT_APP_URI=${{ inputs.CLIENT_APP_URI }}" >> .env.test.local
