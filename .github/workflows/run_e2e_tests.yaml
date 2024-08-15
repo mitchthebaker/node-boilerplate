@@ -46,6 +46,9 @@ jobs:
       - name: Build/Run Docker
         run: |
           docker compose -f $COMPOSE_FILE -f $CI_COMPOSE_FILE build
+      
+      - name: Run Docker
+        run: |
           docker compose -f $COMPOSE_FILE -f $CI_COMPOSE_FILE up api-gateway server-db client-app -d
   
       - name: Run Playwright tests

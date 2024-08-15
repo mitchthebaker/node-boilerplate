@@ -21,7 +21,7 @@ test.describe("Form Submission e2e Test", () => {
     // Check if form submission adds row to the db
     if(db && response.status() === 200) {
       const result = await db.executeQuery(
-        "SELECT * FROM messages WHERE message = $1",
+        "SELECT * FROM public.messages WHERE message = $1",
         ["Playwright test message"]
       );
       console.log(result.rows);
@@ -31,7 +31,7 @@ test.describe("Form Submission e2e Test", () => {
       await message.waitFor();
       await expect(message).toBeVisible();
       await db.executeQuery(
-        "DELETE FROM messages WHERE message = $1", 
+        "DELETE FROM public.messages WHERE message = $1", 
         ["Playwright test message"]
       );
     }
