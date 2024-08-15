@@ -30,7 +30,7 @@ module.exports = defineConfig({
     {
       name: 'Desktop Firefox',
       use: { browserName: 'firefox' },
-      dependencies: ["setup db"],
+      dependencies: ["setup db", "Desktop Chromium"],
     },
     //{
     //  name: 'Desktop WebKit',
