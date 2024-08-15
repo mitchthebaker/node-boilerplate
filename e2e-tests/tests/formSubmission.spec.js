@@ -34,6 +34,11 @@ test.describe("Form Submission e2e Test", () => {
         "DELETE FROM public.messages WHERE message = $1", 
         ["Playwright test message"]
       );
+      const result2 = await db.executeQuery(
+        "SELECT * FROM public.messages WHERE message = $1",
+        ["Playwright test message"]
+      );
+      console.log(result2.rows);
     }
   });
 });
