@@ -56,8 +56,6 @@ services:
       context: .
       dockerfile: "./e2e-tests/Dockerfile"
     image: mitchthebaker/e2e-tests:latest
-    env_file: 
-      - ./e2e-tests/.env.test.local
     depends_on:
       - api-gateway
       - server-db

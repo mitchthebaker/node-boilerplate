@@ -29,7 +29,7 @@ jobs:
             ./api-gateway
             ./client-app
             ./e2e-tests
-          key: ${{ runner.os }}-cache
+          key: ${{ runner.os }}-cache-${{ hashFiles('**/package-lock.json') }}
 
       - name: Build .env files
         uses: ./.github/actions/build-env
@@ -42,6 +42,7 @@ jobs:
           PG_DB: ${{ secrets.PG_DB }}
           PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
           PG_PORT: ${{ secrets.PG_PORT }}
+          CLIENT_APP_URI: ${{ secrets.CLIENT_APP_URI }}
 
       - name: Build/Run Docker
         run: |

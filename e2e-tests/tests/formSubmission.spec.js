@@ -4,7 +4,8 @@ const { db } = require("../utils/db");
 test.describe("Form Submission e2e Test", () => {
   test("should submit form and save data to the database", async ({ page }) => {
     // Navigate to the client-app
-    await page.goto("http://client-app:3000");
+    console.log(process.env.CLIENT_APP_URI);
+    await page.goto(process.env.CLIENT_APP_URI);
 
     // Fill out the form
     await expect(page.getByText("Send a message")).toBeVisible();
@@ -34,11 +35,6 @@ test.describe("Form Submission e2e Test", () => {
         "DELETE FROM public.messages WHERE message = $1", 
         ["Playwright test message"]
       );
-      const result2 = await db.executeQuery(
-        "SELECT * FROM public.messages WHERE message = $1",
-        ["Playwright test message"]
-      );
-      console.log(result2.rows);
     }
   });
 });
