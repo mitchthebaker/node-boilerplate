@@ -17,7 +17,7 @@ jobs:
     secrets: inherit
 
   unit-tests: 
-    uses: ./.github/workflows/run_unit_tests.yaml
+    uses: ./.github/workflows/run_e2e_tests.yaml
     needs:
       - run-docker
 
