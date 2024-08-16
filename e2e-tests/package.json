@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:client": "npm start --prefix ../client-app",
-    "start:api-gateway": "nodemon index.dev.js --prefix ../api-gateway",
+    "start:client": "docker compose up -d client-app",
+    "start:api-gateway": "docker compose up -d api-gateway",
     "test": "playwright test"
   },
   "keywords": [],

@@ -7,8 +7,8 @@ const { test: setup } = require("@playwright/test");
 const { db } = require("../utils/db");
 
 setup("Setup tests", async ({ page }) => {
-  await db.getConnection();
   try {
+    await db.getConnection();
     await db.executeQuery(`
       CREATE TABLE IF NOT EXISTS public.messages
       (
@@ -22,6 +22,7 @@ setup("Setup tests", async ({ page }) => {
       ALTER TABLE IF EXISTS public.messages
           OWNER to admin;
     `);
+
     // Intercept and block requests for specific files
     await page.route('**/*.{png,json}', route => {
       const url = route.request().url();

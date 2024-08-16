@@ -16,7 +16,7 @@ jobs:
     uses: ./.github/workflows/run_docker_containers.yaml
     secrets: inherit
 
-  unit-tests: 
+  e2e-tests: 
     uses: ./.github/workflows/run_e2e_tests.yaml
     secrets: inherit
     needs:
@@ -25,15 +25,12 @@ jobs:
   sonarcloud-analysis:
     uses: ./.github/workflows/run_sonarcloud.yaml
     secrets: inherit
-    needs:
-      - run-docker
   
   build:
     uses: ./.github/workflows/build_docker_containers.yaml
     secrets: inherit
     needs: 
       - run-docker
-      - unit-tests
-      - sonarcloud-analysis
+      - e2e-tests
 
   
