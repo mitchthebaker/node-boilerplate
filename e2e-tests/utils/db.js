@@ -9,17 +9,12 @@ class DB {
     database: process.env.PG_DB,
     password: process.env.PG_PASSWORD,
     port: process.env.PG_PORT,
-    max: 10,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
-    allowExitOnIdle: false,
   };
 
   async getConnection() {
     try {
-      if (!this.pool) {
+      if (this.pool === null || this.pool === undefined) {
         this.pool = new Pool(this.DBConfig);
-        console.log(`√ DB connection has been established!`);
       }
       return this.pool;
     } 
@@ -53,4 +48,6 @@ class DB {
   }
 }
 
-module.exports = { DB };
+const db = new DB();
+
+module.exports = { db };

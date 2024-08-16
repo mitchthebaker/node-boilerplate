@@ -1,0 +1,8 @@
+services:
+  client-app:
+    env_file:
+      - ./client-app/.env.test.local
+  
+  e2e-tests:
+    env_file: 
+      - ./e2e-tests/.env.test.local

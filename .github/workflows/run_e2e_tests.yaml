@@ -1,0 +1,70 @@
+name: Run E2E Tests
+on:
+  #push:
+  #  paths:
+  #    - ".github/workflows/run_e2e_tests.yaml"
+  #  branches:
+  #    - "*-e2e-tests"
+  workflow_call:
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    environment: Development
+    env: 
+      COMPOSE_FILE: ./docker-compose.yml
+      CI_COMPOSE_FILE: ./docker-compose.ci.yml
+    steps: 
+      - name: Checkout repository
+        uses: actions/checkout@v4 
+      
+      - name: Restore cache
+        id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ./api-gateway
+            ./client-app
+            ./e2e-tests
+          key: ${{ runner.os }}-cache-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Build .env files
+        uses: ./.github/actions/build-env
+        with:
+          NODE_ENV_DEV: ${{ secrets.NODE_ENV_DEV }}
+          REACT_APP_API_GATEWAY_URI: ${{ secrets.REACT_APP_API_GATEWAY_URI }}
+          NODE_PORT: ${{ secrets.NODE_PORT }}
+          PG_USER: ${{ secrets.PG_USER }}
+          PG_HOST: ${{ secrets.PG_HOST }}
+          PG_DB: ${{ secrets.PG_DB }}
+          PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
+          PG_PORT: ${{ secrets.PG_PORT }}
+          CLIENT_APP_URI: ${{ secrets.CLIENT_APP_URI }}
+
+      - name: Build/Run Docker
+        run: |
+          docker compose -f $COMPOSE_FILE -f $CI_COMPOSE_FILE build
+      
+      - name: Run Docker
+        run: |
+          docker compose -f $COMPOSE_FILE -f $CI_COMPOSE_FILE up api-gateway server-db client-app -d
+  
+      - name: Run Playwright tests
+        run: |
+          docker compose -f $COMPOSE_FILE -f $CI_COMPOSE_FILE run e2e-tests
+
+      - name: Stop Docker
+        run: docker compose -f $COMPOSE_FILE -f $CI_COMPOSE_FILE down -v
+      
+      - name: Save cache
+        id: cache-save
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ./api-gateway
+            ./client-app
+            ./e2e-tests
+          key: ${{ steps.cache-restore.outputs.cache-primary-key }}

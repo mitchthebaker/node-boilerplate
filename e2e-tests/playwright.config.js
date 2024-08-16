@@ -5,43 +5,33 @@ module.exports = defineConfig({
   timeout: 10 * 1000,
   retries: 0,
   use: {
-    //baseUrl: "http://127.0.0.1:3000",
-    viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     headless: true,
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-    trace: 'retain-on-failure',
   },
   projects: [
     {
       name: "setup db",
       testMatch: /global\.setup\.js/,
-      //teardown: "cleanup db",
+      teardown: "cleanup db",
     },
-    //{
-    //  name: "cleanup db",
-    //  testMatch: /global\.teardown\.js/,
-    //},
+    {
+      name: "cleanup db",
+      testMatch: /global\.teardown\.js/,
+    },
     {
       name: 'Desktop Chromium',
       use: { browserName: 'chromium' },
-      //dependencies: ["setup db"],
+      dependencies: ["setup db"],
     },
-    
-    //{
-    //  name: 'Desktop Firefox',
-    //  use: { browserName: 'firefox' },
-    //},
-    //{
-    //  name: 'Desktop WebKit',
-    //  use: { browserName: 'webkit' },
-    //},
+    {
+      name: 'Desktop Firefox',
+      use: { browserName: 'firefox' },
+      dependencies: ["setup db", "Desktop Chromium"],
+    },
+    {
+      name: 'Desktop WebKit',
+      use: { browserName: 'webkit' },
+      dependencies: ["setup db", "Desktop Chromium", "Desktop Firefox"],
+    },
   ],
-    // Configure web server for client-app
-    webServer: {
-      command: 'npm start',
-      url: 'http://127.0.0.1:3000',
-      reuseExistingServer: !process.env.CI,
-    },
 });

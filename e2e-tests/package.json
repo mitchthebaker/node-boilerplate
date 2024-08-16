@@ -4,15 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:client": "docker compose up -d client-app",
+    "start:api-gateway": "docker compose up -d api-gateway",
+    "test": "playwright test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.45.3",
+    "@playwright/test": "^1.46.0",
     "dotenv": "^16.4.5",
     "pg": "^8.12.0",
-    "playwright": "^1.45.3"
+    "playwright": "^1.46.0"
   }
 }

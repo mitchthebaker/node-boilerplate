@@ -5,7 +5,8 @@ const Form = () => {
   const [input, setInput] = useState("");
 
   const handleChange = (e) => setInput(e.target.value);
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     axios.post(`${process.env.REACT_APP_API_GATEWAY_URI}/messages`, {
       message: input
     }).then(result => {

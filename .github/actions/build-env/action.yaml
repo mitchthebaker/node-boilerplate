@@ -2,6 +2,8 @@ name: Build environment variables
 inputs:
   NODE_ENV_DEV:
     required: true
+  REACT_APP_API_GATEWAY_URI:
+    required: false
   NODE_PORT:
     required: true
   PG_USER:
@@ -14,6 +16,8 @@ inputs:
     required: true
   PG_PORT:
     required: true
+  CLIENT_APP_URI:
+    required: false
 
 runs:
   using: "composite"
@@ -22,7 +26,7 @@ runs:
       shell: bash
       run: |
         cd ./api-gateway
-        touch .env 
+        touch .env
         echo "NODE_ENV=${{ inputs.NODE_ENV_DEV }}" >> .env
         echo "PORT=${{ inputs.NODE_PORT }}" >> .env
         echo "PG_USER=${{ inputs.PG_USER }}" >> .env
@@ -30,4 +34,23 @@ runs:
         echo "PG_DB=${{ inputs.PG_DB }}" >> .env
         echo "PG_PASSWORD=${{ inputs.PG_PASSWORD }}" >> .env
         echo "PG_PORT=${{ inputs.PG_PORT }}" >> .env
-        cat .env
+    
+    - name: Build .env.test.local file for client-app service
+      shell: bash
+      run: |
+        cd ./client-app
+        touch .env.test.local
+        echo "REACT_APP_API_GATEWAY_URI=${{ inputs.REACT_APP_API_GATEWAY_URI }}" >> .env.test.local
+
+    - name: Build .env file for e2e-tests service
+      shell: bash
+      run: |
+        cd ./e2e-tests
+        touch .env.test.local
+        echo "NODE_ENV=test" >> .env.test.local
+        echo "PG_USER=${{ inputs.PG_USER }}" >> .env.test.local
+        echo "PG_HOST=${{ inputs.PG_HOST }}" >> .env.test.local
+        echo "PG_DB=${{ inputs.PG_DB }}" >> .env.test.local
+        echo "PG_PASSWORD=${{ inputs.PG_PASSWORD }}" >> .env.test.local
+        echo "PG_PORT=${{ inputs.PG_PORT }}" >> .env.test.local
+        echo "CLIENT_APP_URI=${{ inputs.CLIENT_APP_URI }}" >> .env.test.local
