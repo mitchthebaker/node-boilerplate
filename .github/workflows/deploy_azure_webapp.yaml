@@ -1,0 +1,24 @@
+name: Deploy Azure Web App
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AZURE_WEBAPP_NAME: node-boilerplate
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      #- uses: azure/login@v1
+      #  with:
+      #    client-id: ${{ secrets.AZURE_CLIENT_ID }}
