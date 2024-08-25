@@ -7,12 +7,20 @@ const setupRoutes = require("@root/server/setupRoutes");
 
 const PORT = parseInt(accessEnv("PORT", "3001"), 10); 
 
+const allowedOrigins = ["http:localhost:3000", "http://20.172.67.146:3000"];
+
 const startServer = () => {
   const app = express();
 
   app.use(bodyParser.json());
   app.use(cors({
-    origin: (origin, cb) => cb(null, true),
+    origin: (origin, cb) => {
+      if(allowedOrigins.includes(origin) || !origin) {
+        cb(null, true);
+      } else {
+        cb(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   }));
 
