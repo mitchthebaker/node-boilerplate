@@ -1,6 +1,7 @@
 const pool = require("@root/db/connection");
 const generateUUID = require("@root/helpers/generateUUID");
 const { exec } = require("child_process");
+const { createHmac } = require("node:crypto");
 
 const setupRoutes = (app) => {
   app.get("/", async (req, res) => {
@@ -45,7 +46,7 @@ const setupRoutes = (app) => {
     try {
       const sig = req.headers["X-Hub-Signature-256"];
       if (sig !== `sha256=${
-        crypto.createHmac('sha256', process.env.GITHUB_SECRET)
+        createHmac('sha256', process.env.GITHUB_SECRET)
         .digest('hex')
       }`) {
         return res.status(403).send('Forbidden');
