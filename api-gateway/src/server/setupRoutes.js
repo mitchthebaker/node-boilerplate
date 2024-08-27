@@ -42,8 +42,6 @@ const setupRoutes = (app) => {
   });
 
   app.post("/deploy-webhook", async (req, res, next) => {
-    if(!req.body) return next(new Error("Invalid body"));
-
     try {
       const sig = req.headers["x-hub-signature"];
       if (sig !== `sha1=${
