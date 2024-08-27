@@ -1,5 +1,6 @@
 const pool = require("@root/db/connection");
 const generateUUID = require("@root/helpers/generateUUID");
+const { exec } = require("child_process");
 
 const setupRoutes = (app) => {
   app.get("/", async (req, res) => {
@@ -37,6 +38,38 @@ const setupRoutes = (app) => {
     }
     catch(err) {
       console.error(`Error when sending POST to /messages, ${err}`);
+    }
+  });
+
+  app.post("/deploy-webhook", async (req, res, next) => {
+    if(!req.body) return next(new Error("Invalid body"));
+
+    try {
+      const sig = req.headers["x-hub-signature"];
+      if (sig !== `sha1=${
+        crypto.createHmac('sha1', GITHUB_SECRET)
+        .update(JSON.stringify(req.body))
+        .digest('hex')
+      }`) {
+        return res.status(403).send('Forbidden');
+      }
+
+      if (req.body.ref === 'refs/heads/main') {
+        exec('sh deploy.sh', (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return res.status(500).send(error);
+            }
+            console.log(`stdout: ${stdout}`);
+            console.error(`stderr: ${stderr}`);
+            res.send('Deployed Docker images!');
+        });
+      } else {
+          res.send('Not a main branch push event.');
+      }
+    }
+    catch(err) {
+      console.error(`Error when sending POST to /deploy-webhook, ${err}`);
     }
   });
 };
