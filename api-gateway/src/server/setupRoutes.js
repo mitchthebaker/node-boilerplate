@@ -47,7 +47,7 @@ const setupRoutes = (app) => {
     try {
       const sig = req.headers["x-hub-signature"];
       if (sig !== `sha1=${
-        crypto.createHmac('sha1', GITHUB_SECRET)
+        crypto.createHmac('sha1', process.env.GITHUB_SECRET)
         .update(JSON.stringify(req.body))
         .digest('hex')
       }`) {
