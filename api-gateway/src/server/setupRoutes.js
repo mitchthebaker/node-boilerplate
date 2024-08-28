@@ -44,9 +44,10 @@ const setupRoutes = (app) => {
 
   app.post("/deploy-webhook", async (req, res, next) => {
     try {
-      const sig = req.headers["X-Hub-Signature-256"];
-      if (sig !== `sha256=${
-        createHmac('sha256', process.env.GITHUB_SECRET)
+      const sig = req.headers["X-Hub-Signature"];
+      if (sig !== `sha1=${
+        createHmac('sha1', process.env.GITHUB_SECRET)
+        .update(req.body)
         .digest('hex')
       }`) {
         return res.status(403).send('Forbidden');
