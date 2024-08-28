@@ -7,7 +7,12 @@ const App = () => {
   return (
     <main className="App">
       <Form />
-      <h3> Messages List </h3>
+      <h2> Messages List </h2>
+      {Array(3).map((e, i) => (
+        <>
+          {i + 1}
+        </>
+      ))}
       <MessagesList />
     </main>
   );
