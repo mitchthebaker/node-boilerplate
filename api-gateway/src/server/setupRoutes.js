@@ -42,7 +42,7 @@ const setupRoutes = (app) => {
     }
   });
 
-  app.post("/deploy-webhook", async (req, res, next) => {
+  /*app.post("/deploy-webhook", async (req, res, next) => {
     try {
       console.log(req.body);
       console.log(req.headers);
@@ -79,7 +79,7 @@ const setupRoutes = (app) => {
     catch(err) {
       console.error(`Error when sending POST to /deploy-webhook, ${err}`);
     }
-  });
+  });*/
 };
 
 module.exports = setupRoutes;
