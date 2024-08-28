@@ -62,7 +62,7 @@ const setupRoutes = (app) => {
       }
 
       if (req.body.ref === 'refs/heads/main') {
-	exec("cwd");      
+	exec("pwd");      
         exec('sh ./api-gateway/scripts/deploy.sh', (error, stdout, stderr) => {
             if (error) {
                 console.error(`exec error: ${error}`);
