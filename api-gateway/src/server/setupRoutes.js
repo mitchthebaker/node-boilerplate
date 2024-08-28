@@ -44,13 +44,14 @@ const setupRoutes = (app) => {
 
   app.post("/deploy-webhook", async (req, res, next) => {
     try {
-      console.log(req.body)
-      const sig = req.headers["X-Hub-Signature"];
+      console.log(req.body);
+      console.log(req.headers);
+      const sig = req.headers["x-hub-signature"];
       const hmac = createHmac("sha1", process.env.GITHUB_SECRET)
 	    .update(JSON.stringify(req.body))
 	    .digest("hex");
       
-      console.log(sig, hmac)
+      console.log(sig, hmac);
 
       if (sig !== `sha1=${
         createHmac('sha1', process.env.GITHUB_SECRET)
