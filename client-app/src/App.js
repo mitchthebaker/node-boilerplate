@@ -7,7 +7,7 @@ const App = () => {
   return (
     <main className="App">
       <Form />
-      <h2> Messages List </h2>
+      <h3> Messages List </h3>
       <MessagesList />
     </main>
   );
