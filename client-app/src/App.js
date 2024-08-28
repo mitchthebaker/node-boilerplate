@@ -7,7 +7,7 @@ const App = () => {
   return (
     <main className="App">
       <Form />
-      {Array(3).fill("").map((e, i) => (
+      {Array(5).fill("").map((e, i) => (
         <div key={`element-${i}`}>
           {i + 1}
         </div>
