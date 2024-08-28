@@ -14,6 +14,7 @@ services:
     volumes:
       - ./api-gateway/:/opt/app
       - /opt/app/node_modules
+      - /var/run/docker.sock:/var/run/docker.sock
 
   server-db:
     container_name: server-db
