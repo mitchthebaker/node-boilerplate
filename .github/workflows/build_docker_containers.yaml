@@ -61,6 +61,14 @@ jobs:
           dockerfile: ./e2e-tests/Dockerfile
           context: .
       
+      - name: Trigger deployment via webhook
+        run: |
+          curl -X POST \
+          -H "Content-Type: application/json" \
+          -H "Authorization: token ${{ secrets.WEBHOOK_SECRET }}" \
+          -d '{"event_type": "trigger-webhook"}' \
+          https://api.github.com/repos/mitchthebaker/node-boilerplate/dispatches
+      
       - name: Log out from DockerHub
         shell: bash
         run: docker logout

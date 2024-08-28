@@ -32,5 +32,3 @@ jobs:
     needs: 
       - run-docker
       - e2e-tests
-
-  
