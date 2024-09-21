@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../node-boilerplate/
+cd ../
 ls
 docker compose down 
 docker compose pull
